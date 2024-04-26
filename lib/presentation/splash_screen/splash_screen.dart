@@ -5,6 +5,8 @@ import 'package:flutter_ecommerce_app/presentation/splash_screen/viewmodel/splas
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/local/shared_preference_helper.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -12,7 +14,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SplashScreenViewModel().delay().then((_) {
       // Navigate to your next screen after delay
-      Navigator.pushReplacementNamed(context, RoutesManager.homeRouteName);
+      SharedPreferenceHelper.getToken().isEmpty
+          ? Navigator.pushNamedAndRemoveUntil(context, RoutesManager.loginRouteName, (route) => false)
+          : Navigator.pushNamedAndRemoveUntil(context, RoutesManager.homeRouteName, (route) => false);
     });
     return Container(
       decoration: BoxDecoration(
@@ -25,7 +29,7 @@ class SplashScreen extends StatelessWidget {
             AssetsManager.appBarLogo,
             width: 100.w,
             height: 100.h,
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           )
         ],
       ),
