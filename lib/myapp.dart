@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/presentation/auth_screens/login_screen/login_screen.dart';
+import 'package:flutter_ecommerce_app/presentation/auth_screens/register_screen/register_screen.dart';
 import 'package:flutter_ecommerce_app/presentation/home/home_screen.dart';
 import 'package:flutter_ecommerce_app/presentation/splash_screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,10 +25,12 @@ class MyApp extends StatelessWidget {
         title: StringsManager.appName,
         theme: MyLightTheme.lightTheme,
         darkTheme: MyDarkTheme.darkTheme,
-        initialRoute: RoutesManager.homeRouteName,
+        initialRoute: RoutesManager.splashScreenRouteName,
         routes: {
           RoutesManager.homeRouteName: (context) => HomeScreen(),
           RoutesManager.splashScreenRouteName: (context) => SplashScreen(),
+          RoutesManager.loginRouteName: (context) => LoginScreen(),
+          RoutesManager.registerRouteName: (context) => RegisterScreen(),
         },
       ),
     );
