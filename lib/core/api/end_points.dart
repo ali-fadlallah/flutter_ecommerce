@@ -5,4 +5,5 @@ class EndPoints {
   static String getSubCategory(String categoryID) => '/api/v1/categories/$categoryID/subcategories';
   static const String signUp = '/api/v1/auth/signup';
   static const String signIn = '/api/v1/auth/signin';
+  static const String updateData = '/api/v1/users/updateMe';
 }
