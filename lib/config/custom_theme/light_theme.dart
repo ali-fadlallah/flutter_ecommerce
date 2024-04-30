@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/core/utils/colors/colors_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,6 +13,7 @@ class MyLightTheme {
       scrolledUnderElevation: 0,
       elevation: 0,
       backgroundColor: Colors.transparent,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.primaryColor,
