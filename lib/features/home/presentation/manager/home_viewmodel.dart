@@ -67,7 +67,6 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
     var result = await addToCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
       numOfItem = cartResponseEntity.numOfCartItems?.toInt() ?? 0;
-      print('view model line 63');
       debugPrint('$numOfItem');
       emit(CartOnSuccess(cartResponseEntity));
     }, (error) {

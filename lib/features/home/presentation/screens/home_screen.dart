@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/toast/show_toast.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,18 +17,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // final HomeTabViewModel viewModelTab = getIt<HomeTabViewModel>();
 
-  final HomeViewModel viewModel = getIt<HomeViewModel>();
+  // final HomeViewModel viewModel = getIt<HomeViewModel>();
 
   @override
   void initState() {
     super.initState();
-    viewModel.setCurrentIndex(viewModel.currentIndex);
+    context.read<HomeViewModel>().setCurrentIndex(HomeViewModel.get(context).currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeViewModel, HomeInitiateState>(
-      bloc: viewModel,
+    return BlocBuilder<HomeViewModel, HomeInitiateState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -45,18 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, RoutesManager.cartRouteName);
                 },
-                icon: BlocListener<HomeViewModel, HomeInitiateState>(
-                  bloc: viewModel,
-                  listener: (context, state) {
-                    // TODO: implement listener
-                    if (state is CartOnSuccess) {
-                      print('CartOnSuccess');
-                    }
-                  },
-                  child: Badge(
-                    child: Icon(Icons.shopping_cart),
-                    label: Text('${viewModel.numOfItem}'),
-                  ),
+                icon: Badge(
+                  child: Icon(Icons.shopping_cart),
+                  label: Text('${HomeViewModel.get(context).numOfItem}'),
                 ),
               ),
             ],
@@ -67,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
               topRight: Radius.circular(30.0.r),
             ),
             child: BottomNavigationBar(
-              currentIndex: viewModel.currentIndex,
+              currentIndex: HomeViewModel.get(context).currentIndex,
               onTap: (index) {
-                viewModel.setCurrentIndex(index);
+                HomeViewModel.get(context).setCurrentIndex(index);
               },
               items: [
                 BottomNavigationBarItem(
@@ -97,18 +86,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: Container(
             padding: REdgeInsets.all(10),
-            child: viewModel.widgetsList[viewModel.currentIndex],
+            child: HomeViewModel.get(context).widgetsList[HomeViewModel.get(context).currentIndex],
           ),
         );
       },
-      listener: (BuildContext context, HomeInitiateState state) {
-        if (state is CartOnSuccess) {
-          ShowToast.showSuccess("CartOnSuccess");
-        }
-        // if (state is HomeTabChanged) {
-        //   ShowToast.showSuccess("HomeTabChanged");
-        // }
-      },
+      // listener: (BuildContext context, HomeInitiateState state) {
+      //   if (state is CartOnSuccess) {
+      //     ShowToast.showSuccess("CartOnSuccess");
+      //   }
+      //   if (state is HomeTabChanged) {
+      //     ShowToast.showSuccess("HomeTabChanged");
+      //   }
+      // }
     );
   }
 }
