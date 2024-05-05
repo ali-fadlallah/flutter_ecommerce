@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/custom_dialog/my_custom_dialogs.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
-import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_tab_viewmodel.dart';
+import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 
 import 'home_brands_widget.dart';
 
@@ -15,7 +15,7 @@ class HomeBrands extends StatefulWidget {
 }
 
 class _HomeBrandsState extends State<HomeBrands> {
-  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
+  HomeViewModel viewModel = getIt<HomeViewModel>();
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _HomeBrandsState extends State<HomeBrands> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeTabViewModel, HomeInitiateState>(
+    return BlocConsumer<HomeViewModel, HomeInitiateState>(
       bloc: viewModel,
       listenWhen: (previous, current) {
         if (current is BrandsOnLoading) return true;

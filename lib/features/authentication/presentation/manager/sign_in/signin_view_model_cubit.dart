@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_in/signin_view_model_state.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,7 +17,7 @@ class SignInViewModelCubit extends Cubit<SignInViewModelState> {
     var result = await signInAuthUseCase.callSignIn(email: email, password: password);
     result?.fold((authEntity) {
       emit(SignInViewModelOnSuccess(authEntity));
-      SharedPreferenceHelper.saveToken(authEntity.token ?? '');
+      SharedPreferenceHelper.saveData(key: StringsManager.keyToken, value: authEntity.token ?? '');
     }, (error) {
       emit(SignInViewModelOnError(error));
     });

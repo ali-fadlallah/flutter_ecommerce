@@ -13,7 +13,5 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   ApiManager.init();
   await SharedPreferenceHelper.init();
-  runApp(
-    const MyApp(),
-  );
+  runApp(const MyApp());
 }

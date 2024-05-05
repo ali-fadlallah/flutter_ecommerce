@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
+import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/splash_screen/presentation/manager/splash_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     SplashScreenViewModel().delay().then((_) {
       // Navigate to your next screen after delay
-      SharedPreferenceHelper.getToken().isEmpty
+      SharedPreferenceHelper.getData(key: StringsManager.keyToken) == null
           ? Navigator.pushNamedAndRemoveUntil(context, RoutesManager.loginRouteName, (route) => false)
           : Navigator.pushNamedAndRemoveUntil(context, RoutesManager.homeRouteName, (route) => false);
     });

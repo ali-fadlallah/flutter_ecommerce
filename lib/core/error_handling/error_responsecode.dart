@@ -2,7 +2,7 @@ import '../utils/strings/strings_manager.dart';
 import 'error_handler.dart';
 
 class ErrorResponseCode {
-  static String CheckError(int? code) {
+  static String checkError(int? code) {
     String newCode = "";
     if (code == ResponseCode.BAD_REQUEST) {
       newCode = StringsManager.badRequestError;

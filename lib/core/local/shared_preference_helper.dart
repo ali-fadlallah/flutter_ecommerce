@@ -6,15 +6,26 @@ class SharedPreferenceHelper {
     sharedPreference = await SharedPreferences.getInstance();
   }
 
-  static Future<void> saveToken(String token) async {
-    await sharedPreference.setString('token', token);
+  static Future<bool?> saveData({required String key, required dynamic value}) async {
+    if (value is int) {
+      return await sharedPreference.setInt(key, value);
+    } else if (value is String) {
+      return await sharedPreference.setString(key, value);
+    } else if (value is bool) {
+      return await sharedPreference.setBool(key, value);
+    } else if (value is double) {
+      return await sharedPreference.setDouble(key, value);
+    } else if (value is List<String>) {
+      return await sharedPreference.setStringList(key, value);
+    }
+    return null;
   }
 
-  static String getToken() {
-    return sharedPreference.getString('token') ?? '';
+  static Object? getData({required String key}) {
+    return sharedPreference.get(key);
   }
 
-  static Future<void> clearToken() {
-    return sharedPreference.remove('token');
+  static Future<void> removeData({required String key}) {
+    return sharedPreference.remove(key);
   }
 }

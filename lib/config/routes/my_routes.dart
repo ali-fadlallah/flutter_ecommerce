@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
+import 'package:flutter_ecommerce_app/features/cart/presentation/screens/cart_screen.dart';
 
 import '../../core/utils/routes/routes_manager.dart';
 import '../../features/authentication/presentation/screens/login_screen.dart';
@@ -18,7 +19,8 @@ class MyRoutes {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case RoutesManager.registerRouteName:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
-
+      case RoutesManager.cartRouteName:
+        return MaterialPageRoute(builder: (_) => CartScreen());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(

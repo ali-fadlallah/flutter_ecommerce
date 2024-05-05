@@ -1,22 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../cart/domain/entities/CartResponseEntity.dart';
+import '../../../cart/domain/use_cases/Add_to_cart_UseCase.dart';
 import '../../../categories/domain/entities/CategoryEntity.dart';
 import '../../../categories/domain/use_cases/get_category_usecase.dart';
+import '../../../categories/presentation/screens/categories_tab.dart';
+import '../../../profile/presentation/screens/profile_tab.dart';
+import '../../../wishlist/presentation/screens/wishlist_tab.dart';
 import '../../domain/entities/brands_entity/BrandsEntity.dart';
 import '../../domain/entities/products_entity/ProductEntity.dart';
 import '../../domain/use_cases/brands/get_brands_usecase.dart';
 import '../../domain/use_cases/products/get_most_selling_product_use_case.dart';
+import '../screens/home_tab.dart';
 
 @injectable
-class HomeTabViewModel extends Cubit<HomeInitiateState> {
+class HomeViewModel extends Cubit<HomeInitiateState> {
+  final List<Widget> widgetsList = [HomeTab(), CategoriesTab(), WishListTab(), ProfileTab()];
+
+  static HomeViewModel get(context) => BlocProvider.of(context);
+  AddToCartUseCase addToCartUseCase;
   GetCategoryUseCase getCategoryUseCase;
 
   GetBrandsUseCase getBrandsUseCase;
 
   GetMostSellingProductsUseCase getMostSellingProductsUseCase;
   @factoryMethod
-  HomeTabViewModel(this.getCategoryUseCase, this.getBrandsUseCase, this.getMostSellingProductsUseCase) : super(CategoriesOnLoading());
+  HomeViewModel(this.getCategoryUseCase, this.getBrandsUseCase, this.getMostSellingProductsUseCase, this.addToCartUseCase)
+      : super(CategoriesOnLoading());
 
   getCategories() async {
     emit(CategoriesOnLoading());
@@ -48,9 +60,33 @@ class HomeTabViewModel extends Cubit<HomeInitiateState> {
       emit(MostSellingOnError(error));
     });
   }
+
+  int numOfItem = 0;
+  addToCart({required String productId}) async {
+    emit(CartOnLoading());
+    var result = await addToCartUseCase.call(productId: productId);
+    result?.fold((cartResponseEntity) {
+      numOfItem = cartResponseEntity.numOfCartItems?.toInt() ?? 0;
+      print('view model line 63');
+      debugPrint('$numOfItem');
+      emit(CartOnSuccess(cartResponseEntity));
+    }, (error) {
+      emit(CartOnError(error));
+    });
+  }
+
+  int currentIndex = 0;
+  setCurrentIndex(int newIndex) {
+    currentIndex = newIndex;
+    emit(HomeTabChanged());
+  }
 }
 
 sealed class HomeInitiateState {}
+
+class HomeTabChanged extends HomeInitiateState {}
+
+class HomeInitiate extends HomeInitiateState {}
 
 class CategoriesOnLoading extends HomeInitiateState {}
 
@@ -92,4 +128,17 @@ class MostSellingOnError extends HomeInitiateState {
   String? errorMsg;
 
   MostSellingOnError(this.errorMsg);
+}
+
+final class CartOnLoading extends HomeInitiateState {}
+
+final class CartOnError extends HomeInitiateState {
+  final String? errorMsg;
+  CartOnError(this.errorMsg);
+}
+
+final class CartOnSuccess extends HomeInitiateState {
+  final CartResponseEntity? cartResponseEntity;
+
+  CartOnSuccess(this.cartResponseEntity);
 }

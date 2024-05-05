@@ -1,10 +1,13 @@
 class StringsManager {
   static const String appName = 'E-Commerce';
+  static const String keyToken = 'token';
+  static const String keyLocale = 'locale';
   static const String noRouteFound = 'No Route Found!';
   static const String fontFamilyName = 'Tajawal';
   static const String categories = 'Categories';
   static const String viewAll = 'view all';
   static const String brands = 'Brands';
+  static const String cart = 'Cart';
   static const String mostSelling = 'MostSelling';
   static const String okAlertDialog = 'OK';
   static const String loadingAlertDialog = 'Loading...';
@@ -26,7 +29,6 @@ class StringsManager {
   static const String enterYourFullName = 'Enter your full name';
   static const String enterYourMobile = 'Enter your mobile no.';
   static const String enterYourEmailAddress = 'Enter your email address';
-
   static const String enterValidEmail = 'Enter valid email';
   static const String enterValidMobile = 'Enter valid mobile';
   static const String enterValidPassword = 'Enter valid password';

@@ -15,6 +15,7 @@ class HomeBrandsWidget extends StatelessWidget {
         SizedBox(
           height: 160.h,
           child: ListView.separated(
+            shrinkWrap: true,
             separatorBuilder: (context, index) => SizedBox(
               width: 20.w,
             ),
