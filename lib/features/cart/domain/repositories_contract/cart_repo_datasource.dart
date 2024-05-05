@@ -3,4 +3,10 @@ import 'package:flutter_ecommerce_app/features/cart/domain/entities/CartResponse
 
 abstract class CartRepoDataSource {
   Future<Either<CartResponseEntity, String>?> addToCart({required String productId});
+
+  Future<Either<CartResponseEntity, String>?> getCart();
+
+  Future<Either<CartResponseEntity, String>?> updateCart({required String productId, required String count});
+
+  Future<Either<CartResponseEntity, String>?> deleteCart({required String productId});
 }

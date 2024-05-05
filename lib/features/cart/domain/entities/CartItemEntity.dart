@@ -1,3 +1,5 @@
+import 'package:flutter_ecommerce_app/features/home/domain/entities/products_entity/ProductEntity.dart';
+
 class CartItemEntity {
   CartItemEntity({
     this.count,
@@ -8,6 +10,6 @@ class CartItemEntity {
 
   num? count;
   String? id;
-  String? product;
+  ProductEntity? product;
   num? price;
 }
