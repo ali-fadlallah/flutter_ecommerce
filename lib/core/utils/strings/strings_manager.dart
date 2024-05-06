@@ -41,6 +41,7 @@ class StringsManager {
   static const String submit = 'Submit';
   static const String checkOut = 'CheckOut';
   static const String totalPrice = 'Total Price';
+  static const String cartCleared = 'The cart has been cleared successfully';
 
   ///Connections Response
   static String success = "Connected Successfully";

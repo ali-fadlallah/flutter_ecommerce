@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/CartResponseEntity.dart';
+import '../../domain/use_cases/clear_cart_use_case.dart';
 import '../../domain/use_cases/delete_cart_use_case.dart';
 import '../../domain/use_cases/get_cart_use_case.dart';
 import '../../domain/use_cases/update_cart_use_case.dart';
@@ -16,9 +17,10 @@ class CartCubit extends Cubit<CartState> {
   GetCartUseCase getCartUseCase;
   UpdateCartUseCase updateCartUseCase;
   DeleteCartUseCase deleteCartUseCase;
+  ClearCartUseCase clearCartUseCase;
 
   @factoryMethod
-  CartCubit(this.getCartUseCase, this.updateCartUseCase, this.deleteCartUseCase) : super(CartInitial());
+  CartCubit(this.getCartUseCase, this.updateCartUseCase, this.deleteCartUseCase, this.clearCartUseCase) : super(CartInitial());
 
   static CartCubit get(context) => BlocProvider.of(context);
 
@@ -28,8 +30,11 @@ class CartCubit extends Cubit<CartState> {
     emit(CartOnLoading());
     var result = await getCartUseCase.call();
     result?.fold((cartResponseEntity) {
-      emit(GetCartOnSuccess(cartResponseEntity));
-      // cartResponse = cartResponseEntity;
+      if (cartResponseEntity.statusMsg == 'fail' || cartResponseEntity.data?.products?.length == null || cartResponseEntity.numOfCartItems == 0) {
+        emit(EmptyCartOnSuccess());
+      } else {
+        emit(GetCartOnSuccess(cartResponseEntity));
+      }
     }, (errorMsg) {
       emit(CartOnError(errorMsg));
     });
@@ -39,7 +44,11 @@ class CartCubit extends Cubit<CartState> {
     emit(UpdateCountLoadingState());
     var result = await updateCartUseCase.call(productId: productId, count: count);
     result?.fold((cartResponseEntity) {
-      emit(GetCartOnSuccess(cartResponseEntity));
+      if (cartResponseEntity.data?.products?.length == 0) {
+        emit(EmptyCartOnSuccess());
+      } else {
+        emit(GetCartOnSuccess(cartResponseEntity));
+      }
     }, (errorMsg) {
       emit(UpdateCountErrorState(errorMsg));
     });
@@ -49,9 +58,25 @@ class CartCubit extends Cubit<CartState> {
     emit(DeleteItemLoadingState());
     var result = await deleteCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
-      emit(GetCartOnSuccess(cartResponseEntity));
+      if (cartResponseEntity.data?.products?.length == 0) {
+        emit(EmptyCartOnSuccess());
+      } else {
+        emit(GetCartOnSuccess(cartResponseEntity));
+      }
     }, (errorMsg) {
-      print(errorMsg);
+      emit(DeleteItemErrorState(errorMsg));
+    });
+  }
+
+  clearCart() async {
+    emit(ClearCartOnLoading());
+    var result = await clearCartUseCase.call();
+    result?.fold((cartResponseEntity) {
+      if (cartResponseEntity.message == 'success') {
+        emit(ClearCartOnSuccess());
+      }
+      //
+    }, (errorMsg) {
       emit(DeleteItemErrorState(errorMsg));
     });
   }

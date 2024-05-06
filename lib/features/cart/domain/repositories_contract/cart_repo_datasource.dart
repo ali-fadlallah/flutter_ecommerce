@@ -9,4 +9,6 @@ abstract class CartRepoDataSource {
   Future<Either<CartResponseEntity, String>?> updateCart({required String productId, required String count});
 
   Future<Either<CartResponseEntity, String>?> deleteCart({required String productId});
+
+  Future<Either<CartResponseEntity, String>?> clearCart();
 }

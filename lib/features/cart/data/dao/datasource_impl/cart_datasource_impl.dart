@@ -18,7 +18,7 @@ class CartDataSourceImpl extends CartDataSource {
   Future<Either<CartResponse, String>?> addToCart({required String productId}) async {
     try {
       var result = await apiManager.postRequest(
-        endPoint: EndPoints.cart,
+        endPoint: EndPoints.addToCart,
         body: {"productId": productId},
         headers: {
           'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
@@ -39,17 +39,18 @@ class CartDataSourceImpl extends CartDataSource {
   Future<Either<CartResponse, String>?> getCart() async {
     try {
       var result = await apiManager.getRequest(
-        endPoint: EndPoints.cart,
+        endPoint: EndPoints.addToCart,
         headers: {
           'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
         },
       );
       CartResponse cartResponse = CartResponse.fromJson(result.data);
-      if (cartResponse.statusMsg != null) {
-        return Right(result.statusMessage ?? '');
-      } else {
-        return Left(cartResponse);
-      }
+      return Left(cartResponse);
+      // if (cartResponse.statusMsg != null) {
+      //   return Right(result.statusMessage ?? '');
+      // } else {
+      //   return Left(cartResponse);
+      // }
     } catch (e) {
       return const Right(StringsManager.connectionError);
     }
@@ -81,6 +82,26 @@ class CartDataSourceImpl extends CartDataSource {
     try {
       var result = await apiManager.deleteRequest(
         endPoint: EndPoints.deleteCart(productId),
+        headers: {
+          'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
+        },
+      );
+      CartResponse cartResponse = CartResponse.fromJson(result.data);
+      if (cartResponse.statusMsg != null) {
+        return Right(result.statusMessage ?? '');
+      } else {
+        return Left(cartResponse);
+      }
+    } catch (e) {
+      return const Right(StringsManager.connectionError);
+    }
+  }
+
+  @override
+  Future<Either<CartResponse, String>?> clearCart() async {
+    try {
+      var result = await apiManager.deleteRequest(
+        endPoint: EndPoints.clearCart,
         headers: {
           'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
         },

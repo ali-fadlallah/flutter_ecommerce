@@ -54,4 +54,15 @@ class CartRepoImpl extends CartRepoDataSource {
       return Right(error);
     });
   }
+
+  @override
+  Future<Either<CartResponseEntity, String>?> clearCart() async {
+    var response = await cartDataSource.clearCart();
+    return response?.fold((response) {
+      CartResponseEntity cartResponseEntity = response.toCartResponseEntity();
+      return Left(cartResponseEntity);
+    }, (error) {
+      return Right(error);
+    });
+  }
 }
