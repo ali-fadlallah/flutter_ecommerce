@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     HomeViewModel.get(context).currentIndex;
+    HomeViewModel.get(context).getCartCount();
   }
 
   @override
@@ -40,12 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             actions: [
               IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RoutesManager.cartRouteName);
+                onPressed: () async {
+                  final result = await Navigator.pushNamed(context, RoutesManager.cartRouteName);
+                  if (result != null && mounted) {
+                    HomeViewModel.get(context).getCartCount();
+                  }
                 },
                 icon: Badge(
-                  child: Icon(Icons.shopping_cart),
                   label: Text('${HomeViewModel.get(context).numOfItem}'),
+                  child: Icon(Icons.shopping_cart),
                 ),
               ),
             ],

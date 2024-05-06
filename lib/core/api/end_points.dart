@@ -7,9 +7,10 @@ class EndPoints {
   static const String signUp = '/api/v1/auth/signup';
   static const String signIn = '/api/v1/auth/signin';
   static const String updateData = '/api/v1/users/updateMe';
-  static const String cart = '/api/v1/cart';
+  static const String addToCart = '/api/v1/cart';
 
   static String updateCart(String productId) => '/api/v1/cart/$productId';
 
   static String deleteCart(String productId) => '/api/v1/cart/$productId';
+  static String clearCart = '/api/v1/cart';
 }

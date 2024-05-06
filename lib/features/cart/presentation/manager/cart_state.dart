@@ -19,6 +19,8 @@ final class GetCartOnSuccess extends CartState {
   GetCartOnSuccess(this.cartResponseEntity);
 }
 
+final class EmptyCartOnSuccess extends CartState {}
+
 final class CartCountUpdated extends CartState {
   final int? theNumber;
 
@@ -52,6 +54,10 @@ class DeleteItemErrorState extends CartState {
 
   DeleteItemErrorState(this.errorMsg);
 }
+
+final class ClearCartOnSuccess extends CartState {}
+
+final class ClearCartOnLoading extends CartState {}
 
 // final class CartOnLoading extends CartState {}
 //

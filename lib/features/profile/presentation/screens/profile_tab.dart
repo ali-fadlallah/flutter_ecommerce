@@ -12,7 +12,7 @@ import '../../../../core/constants/regex.dart';
 import '../../../../core/utils/strings/strings_manager.dart';
 
 class ProfileTab extends StatefulWidget {
-  ProfileTab({Key? key}) : super(key: key);
+  const ProfileTab({Key? key}) : super(key: key);
 
   @override
   State<ProfileTab> createState() => _ProfileTabState();
@@ -83,7 +83,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         children: [
                           FadeInRight(
                             animate: true,
-                            delay: Duration(seconds: 1),
+                            delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
                               textFieldLabel: StringsManager.yourFullName,
                               controller: controllerFullName..text = state.authEntity.user?.name ?? '',
@@ -101,7 +101,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                           FadeInLeft(
                             animate: true,
-                            delay: Duration(seconds: 1),
+                            delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
                               textFieldLabel: StringsManager.yourEmail,
                               controller: controllerEmail..text = state.authEntity.user?.email ?? '',
@@ -119,7 +119,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                           FadeInRight(
                             animate: true,
-                            delay: Duration(seconds: 1),
+                            delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
                               textFieldLabel: StringsManager.yourMobileNumber,
                               controller: controllerMobile,
@@ -137,7 +137,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                           FadeInLeft(
                             animate: true,
-                            delay: Duration(seconds: 1),
+                            delay: const Duration(seconds: 1),
                             child: CustomButton(
                               textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white),
                               height: 55.h,

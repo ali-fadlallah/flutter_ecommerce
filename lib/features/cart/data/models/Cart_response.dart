@@ -41,6 +41,7 @@ class CartResponse {
       numOfCartItems: numOfCartItems,
       status: status,
       message: message,
+      statusMsg: statusMsg,
       data: data?.toCartEntity(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/features/cart/domain/use_cases/get_cart_use_case.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../cart/domain/entities/CartResponseEntity.dart';
@@ -17,17 +18,19 @@ import '../screens/home_tab.dart';
 
 @injectable
 class HomeViewModel extends Cubit<HomeInitiateState> {
-  final List<Widget> widgetsList = [HomeTab(), CategoriesTab(), WishListTab(), ProfileTab()];
+  final List<Widget> widgetsList = [const HomeTab(), const CategoriesTab(), const WishListTab(), ProfileTab()];
 
   static HomeViewModel get(context) => BlocProvider.of(context);
   AddToCartUseCase addToCartUseCase;
   GetCategoryUseCase getCategoryUseCase;
-
   GetBrandsUseCase getBrandsUseCase;
 
+  GetCartUseCase getCartUseCase;
+
   GetMostSellingProductsUseCase getMostSellingProductsUseCase;
+
   @factoryMethod
-  HomeViewModel(this.getCategoryUseCase, this.getBrandsUseCase, this.getMostSellingProductsUseCase, this.addToCartUseCase)
+  HomeViewModel(this.getCategoryUseCase, this.getBrandsUseCase, this.getMostSellingProductsUseCase, this.addToCartUseCase, this.getCartUseCase)
       : super(CategoriesOnLoading());
 
   getCategories() async {
@@ -67,7 +70,6 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
     var result = await addToCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
       numOfItem = cartResponseEntity.numOfCartItems?.toInt() ?? 0;
-      debugPrint('$numOfItem');
       emit(CartOnSuccess(cartResponseEntity, productId));
     }, (error) {
       emit(CartOnError(error, productId));
@@ -75,9 +77,21 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
   }
 
   int currentIndex = 0;
+
   setCurrentIndex(int newIndex) {
     currentIndex = newIndex;
     emit(HomeTabChanged());
+  }
+
+  getCartCount() async {
+    var result = await getCartUseCase.call();
+    result?.fold((cartResponseEntity) {
+      numOfItem = cartResponseEntity.numOfCartItems?.toInt() ?? 0;
+      emit(GetCartOnSuccess(cartResponseEntity));
+      // cartResponse = cartResponseEntity;
+    }, (errorMsg) {
+      emit(GetCartOnError(errorMsg));
+    });
   }
 }
 
@@ -147,4 +161,16 @@ final class CartOnSuccess extends HomeInitiateState {
   String productId;
 
   CartOnSuccess(this.cartResponseEntity, this.productId);
+}
+
+class GetCartOnSuccess extends HomeInitiateState {
+  CartResponseEntity cartResponseEntity;
+
+  GetCartOnSuccess(this.cartResponseEntity);
+}
+
+final class GetCartOnError extends HomeInitiateState {
+  final String? errorMsg;
+
+  GetCartOnError(this.errorMsg);
 }

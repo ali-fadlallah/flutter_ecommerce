@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../domain/entities/CartItemEntity.dart';
 
 class CartItem extends StatelessWidget {
-  final CartItemEntity cartItemEntity;
+  final CartItemEntity? cartItemEntity;
   int counter = 0;
 
   CartItem({Key? key, required this.cartItemEntity}) : super(key: key);
@@ -39,7 +39,7 @@ class CartItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.r),
             ),
             child: CachedNetworkImage(
-              imageUrl: cartItemEntity.product?.imageCover ?? '',
+              imageUrl: cartItemEntity?.product?.imageCover ?? '',
               fit: BoxFit.fill,
               width: 120.w,
               height: 113.h,
@@ -54,13 +54,13 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  cartItemEntity.product?.title ?? '',
+                  cartItemEntity?.product?.title ?? '',
                   style: Theme.of(context).textTheme.headlineMedium,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${StringsManager.EGP} ${cartItemEntity.price?.toInt() ?? 0}',
+                  '${StringsManager.EGP} ${cartItemEntity?.price?.toInt() ?? 0}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
@@ -72,7 +72,7 @@ class CartItem extends StatelessWidget {
               Expanded(
                 child: IconButton(
                   onPressed: () {
-                    CartCubit.get(context).deleteItemCart(productId: cartItemEntity.product?.id ?? '');
+                    CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
                   },
                   icon: SvgPicture.asset(
                     AssetsManager.iconDeleteCartItem,
@@ -93,26 +93,26 @@ class CartItem extends StatelessWidget {
                       IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          counter = cartItemEntity.count?.toInt() ?? 0;
+                          counter = cartItemEntity?.count?.toInt() ?? 0;
                           counter--;
                           if (counter <= 0) {
-                            CartCubit.get(context).deleteItemCart(productId: cartItemEntity.product?.id ?? '');
+                            CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
                           } else {
-                            CartCubit.get(context).updateCart(productId: cartItemEntity.product?.id ?? '', count: counter.toString());
+                            CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
                           }
                         },
                         icon: SvgPicture.asset(AssetsManager.iconSubStractCartItem),
                       ),
                       Text(
-                        '${cartItemEntity.count?.toInt() ?? 0}',
+                        '${cartItemEntity?.count?.toInt() ?? 0}',
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                       IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          counter = cartItemEntity.count?.toInt() ?? 0;
+                          counter = cartItemEntity?.count?.toInt() ?? 0;
                           counter++;
-                          CartCubit.get(context).updateCart(productId: cartItemEntity.product?.id ?? '', count: counter.toString());
+                          CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
                         },
                         icon: SvgPicture.asset(AssetsManager.iconAddCartItem),
                       ),
