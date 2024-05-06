@@ -10,8 +10,7 @@ import '../../domain/entities/CartItemEntity.dart';
 
 class CartItem extends StatelessWidget {
   final CartItemEntity cartItemEntity;
-
-  int counter = 0;
+  final int counter = 0;
 
   CartItem({Key? key, required this.cartItemEntity}) : super(key: key);
 
