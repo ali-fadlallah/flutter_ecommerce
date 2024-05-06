@@ -22,13 +22,23 @@ class ApiManager {
     );
   }
 
-  Future<Response> getRequest({required String endPoint, Map<String, dynamic>? queryParameters}) async {
-    var response = await dio.get(endPoint, queryParameters: queryParameters);
+  Future<Response> getRequest({required String endPoint, Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers}) async {
+    var response = await dio.get(endPoint, queryParameters: queryParameters, options: Options(headers: headers));
     return response;
   }
 
-  Future<Response> postRequest({required String endPoint, Map<String, dynamic>? body}) async {
-    var response = await dio.post(endPoint, data: body);
+  Future<Response> postRequest({required String endPoint, Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+    var response = await dio.post(endPoint, data: body, options: Options(headers: headers));
+    return response;
+  }
+
+  Future<Response> putRequest({required String endPoint, Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+    var response = await dio.put(endPoint, data: body, options: Options(headers: headers));
+    return response;
+  }
+
+  Future<Response> deleteRequest({required String endPoint, Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+    var response = await dio.delete(endPoint, data: body, options: Options(headers: headers));
     return response;
   }
 }

@@ -1,16 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
+import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../domain/entities/products_entity/ProductEntity.dart';
+import '../../features/home/domain/entities/products_entity/ProductEntity.dart';
+import '../utils/toast/show_toast.dart';
 
 class ProductEntityItem extends StatelessWidget {
   final ProductEntity productEntity;
-  const ProductEntityItem({Key? key, required this.productEntity}) : super(key: key);
+
+  ProductEntityItem({Key? key, required this.productEntity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +107,30 @@ class ProductEntityItem extends StatelessWidget {
                       ),
                       onRatingUpdate: (rating) {},
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: SvgPicture.asset(AssetsManager.imgAddToCart),
+                    BlocConsumer<HomeViewModel, HomeInitiateState>(
+                      listener: (context, state) {
+                        if (state is CartOnSuccess && state.productId == productEntity.id) {
+                          ShowToast.showSuccess(state.cartResponseEntity?.message ?? '');
+                        }
+                        if (state is CartOnError) {
+                          ShowToast.showError(state.errorMsg ?? '');
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is CartOnLoading && state.productId == productEntity.id) {
+                          return const SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        }
+                        return InkWell(
+                          onTap: () {
+                            HomeViewModel.get(context).addToCart(productId: productEntity.id ?? '');
+                          },
+                          child: SvgPicture.asset(AssetsManager.imgAddToCart),
+                        );
+                      },
                     )
                   ],
                 ),
