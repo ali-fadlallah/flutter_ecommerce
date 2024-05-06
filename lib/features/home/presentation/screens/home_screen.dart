@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeViewModel>().setCurrentIndex(HomeViewModel.get(context).currentIndex);
+    HomeViewModel.get(context).currentIndex;
   }
 
   @override
@@ -90,51 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       },
-      // listener: (BuildContext context, HomeInitiateState state) {
-      //   if (state is CartOnSuccess) {
-      //     ShowToast.showSuccess("CartOnSuccess");
-      //   }
-      //   if (state is HomeTabChanged) {
-      //     ShowToast.showSuccess("HomeTabChanged");
-      //   }
-      // }
     );
   }
 }
-/*
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RoutesManager.cartRouteName);
-                  },
-                  icon: BlocConsumer<HomeViewModel, HomeInitiateState>(
-                    bloc: viewModel,
-                    listenWhen: (previous, current) {
-                      if (current is CartOnSuccess) {
-                        return true;
-                      }
-                      return false;
-                    },
-                    buildWhen: (previous, current) {
-                      if (current is CartOnSuccess) {
-                        print('Hekkkklo');
-                        return true;
-                      }
-                      print('Hekkkklo');
-                      return false;
-                    },
-                    builder: (context, state) {
-                      print('home screen line 71');
-                      return Badge(
-                        child: Icon(Icons.shopping_cart),
-                        label: Text('${viewModel.numOfItem}'),
-                      );
-                    },
-                    listener: (context, state) {
-                      if (state is CartOnSuccess) {
-                        print('objectsadasd');
-                      }
-                    },
-                  ),
-                ),
-
- */

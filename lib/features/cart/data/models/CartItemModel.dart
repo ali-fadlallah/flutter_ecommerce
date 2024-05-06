@@ -1,4 +1,5 @@
 import 'package:flutter_ecommerce_app/features/cart/domain/entities/CartItemEntity.dart';
+import 'package:flutter_ecommerce_app/features/home/data/models/products_response/ProductModel.dart';
 
 class CartItemModel {
   CartItemModel({
@@ -11,12 +12,13 @@ class CartItemModel {
   CartItemModel.fromJson(dynamic json) {
     count = json['count'];
     id = json['_id'];
-    product = json['product'];
+    product = json['product'] is! String ? ProductModel.fromJson(json['product']) : null;
     price = json['price'];
   }
+
   num? count;
   String? id;
-  String? product;
+  ProductModel? product;
   num? price;
 
   Map<String, dynamic> toJson() {
@@ -29,6 +31,6 @@ class CartItemModel {
   }
 
   CartItemEntity toCartItemEntity() {
-    return CartItemEntity(id: id, price: price, count: count, product: product);
+    return CartItemEntity(id: id, price: price, count: count, product: product?.toProductEntity());
   }
 }

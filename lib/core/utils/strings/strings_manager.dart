@@ -39,6 +39,8 @@ class StringsManager {
   static const String yourEmail = 'Your E-mail';
   static const String yourMobileNumber = 'Your Mobile Number';
   static const String submit = 'Submit';
+  static const String checkOut = 'CheckOut';
+  static const String totalPrice = 'Total Price';
 
   ///Connections Response
   static String success = "Connected Successfully";

@@ -21,4 +21,37 @@ class CartRepoImpl extends CartRepoDataSource {
       return Right(error);
     });
   }
+
+  @override
+  Future<Either<CartResponseEntity, String>?> getCart() async {
+    var response = await cartDataSource.getCart();
+    return response?.fold((response) {
+      CartResponseEntity cartResponseEntity = response.toCartResponseEntity();
+      return Left(cartResponseEntity);
+    }, (error) {
+      return Right(error);
+    });
+  }
+
+  @override
+  Future<Either<CartResponseEntity, String>?> updateCart({required String productId, required String count}) async {
+    var response = await cartDataSource.updateCart(productId: productId, count: count);
+    return response?.fold((response) {
+      CartResponseEntity cartResponseEntity = response.toCartResponseEntity();
+      return Left(cartResponseEntity);
+    }, (error) {
+      return Right(error);
+    });
+  }
+
+  @override
+  Future<Either<CartResponseEntity, String>?> deleteCart({required String productId}) async {
+    var response = await cartDataSource.deleteCart(productId: productId);
+    return response?.fold((response) {
+      CartResponseEntity cartResponseEntity = response.toCartResponseEntity();
+      return Left(cartResponseEntity);
+    }, (error) {
+      return Right(error);
+    });
+  }
 }
