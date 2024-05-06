@@ -20,7 +20,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       var response = await apiManager.putRequest(
         endPoint: EndPoints.updateData,
         headers: {
-          'token': SharedPreferenceHelper.getToken(),
+          'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
         },
       );
       var authResponse = AuthResponse.fromJson(response.data);
@@ -45,7 +45,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
           "phone": phone,
         },
         headers: {
-          'token': SharedPreferenceHelper.getToken(),
+          'token': SharedPreferenceHelper.getData(key: StringsManager.keyToken),
         },
       );
       var authResponse = AuthResponse.fromJson(response.data);

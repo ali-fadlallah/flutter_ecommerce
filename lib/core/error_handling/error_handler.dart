@@ -35,7 +35,7 @@ class ErrorHandler implements Exception {
         if (error.response != null && error.response?.statusCode != null && error.response?.statusMessage != null) {
           return (error.response?.statusMessage ?? "");
         } else {
-          return (error.response!.statusMessage ?? 'some thing went wrong');
+          return (error.response?.statusMessage ?? '');
         }
       case DioExceptionType.cancel:
         return DataSource.CANCEL.getFailure();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/product_entity_item.dart';
-import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_tab_viewmodel.dart';
+import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/di/di.dart';
@@ -14,7 +14,7 @@ class HomeMostSellingWidget extends StatefulWidget {
 }
 
 class _HomeMostSellingWidgetState extends State<HomeMostSellingWidget> {
-  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
+  HomeViewModel viewModel = getIt<HomeViewModel>();
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _HomeMostSellingWidgetState extends State<HomeMostSellingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeTabViewModel, HomeInitiateState>(
+    return BlocBuilder<HomeViewModel, HomeInitiateState>(
       bloc: viewModel,
       buildWhen: (previous, current) {
         if (current is MostSellingOnSuccess || current is MostSellingOnError || current is MostSellingOnLoading) {

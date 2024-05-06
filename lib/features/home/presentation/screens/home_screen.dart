@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/features/categories/presentation/screens/categories_tab.dart';
-import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_view_model.dart';
-import 'package:flutter_ecommerce_app/features/home/presentation/screens/home_tab.dart';
-import 'package:flutter_ecommerce_app/features/profile/presentation/screens/profile_tab.dart';
-import 'package:flutter_ecommerce_app/features/wishlist/presentation/screens/wishlist_tab.dart';
+import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/utils/routes/routes_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -17,20 +15,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> widgetsList = [HomeTab(), CategoriesTab(), WishListTab(), ProfileTab()];
+  // final HomeTabViewModel viewModelTab = getIt<HomeTabViewModel>();
 
-  final HomeViewModel viewModel = HomeViewModel();
+  // final HomeViewModel viewModel = getIt<HomeViewModel>();
 
   @override
   void initState() {
     super.initState();
-    viewModel.setCurrentIndex(viewModel.currentIndex);
+    context.read<HomeViewModel>().setCurrentIndex(HomeViewModel.get(context).currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeViewModel, HomeStates>(
-      bloc: viewModel,
+    return BlocBuilder<HomeViewModel, HomeInitiateState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -40,6 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 22.h,
               width: 66.w,
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RoutesManager.cartRouteName);
+                },
+                icon: Badge(
+                  child: Icon(Icons.shopping_cart),
+                  label: Text('${HomeViewModel.get(context).numOfItem}'),
+                ),
+              ),
+            ],
           ),
           bottomNavigationBar: ClipRRect(
             borderRadius: BorderRadius.only(
@@ -47,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
               topRight: Radius.circular(30.0.r),
             ),
             child: BottomNavigationBar(
-              currentIndex: viewModel.currentIndex,
+              currentIndex: HomeViewModel.get(context).currentIndex,
               onTap: (index) {
-                viewModel.setCurrentIndex(index);
+                HomeViewModel.get(context).setCurrentIndex(index);
               },
               items: [
                 BottomNavigationBarItem(
@@ -77,10 +86,55 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: Container(
             padding: REdgeInsets.all(10),
-            child: widgetsList[viewModel.currentIndex],
+            child: HomeViewModel.get(context).widgetsList[HomeViewModel.get(context).currentIndex],
           ),
         );
       },
+      // listener: (BuildContext context, HomeInitiateState state) {
+      //   if (state is CartOnSuccess) {
+      //     ShowToast.showSuccess("CartOnSuccess");
+      //   }
+      //   if (state is HomeTabChanged) {
+      //     ShowToast.showSuccess("HomeTabChanged");
+      //   }
+      // }
     );
   }
 }
+/*
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RoutesManager.cartRouteName);
+                  },
+                  icon: BlocConsumer<HomeViewModel, HomeInitiateState>(
+                    bloc: viewModel,
+                    listenWhen: (previous, current) {
+                      if (current is CartOnSuccess) {
+                        return true;
+                      }
+                      return false;
+                    },
+                    buildWhen: (previous, current) {
+                      if (current is CartOnSuccess) {
+                        print('Hekkkklo');
+                        return true;
+                      }
+                      print('Hekkkklo');
+                      return false;
+                    },
+                    builder: (context, state) {
+                      print('home screen line 71');
+                      return Badge(
+                        child: Icon(Icons.shopping_cart),
+                        label: Text('${viewModel.numOfItem}'),
+                      );
+                    },
+                    listener: (context, state) {
+                      if (state is CartOnSuccess) {
+                        print('objectsadasd');
+                      }
+                    },
+                  ),
+                ),
+
+ */

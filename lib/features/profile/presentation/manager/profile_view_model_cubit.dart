@@ -1,10 +1,11 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/features/authentication/domain/entities/AuthEntity.dart';
 import 'package:flutter_ecommerce_app/features/profile/domain/use_cases/get_profile_data_use_case.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../domain/use_cases/update_profile_data_use_case.dart';
+import '../widgets/language_bottom_sheet_widget.dart';
 
 part 'profile_view_model_state.dart';
 
@@ -15,6 +16,8 @@ class ProfileViewModelCubit extends Cubit<ProfileViewModelState> {
   UpdateProfileDataUseCase updateProfileDataUseCase;
   @factoryMethod
   ProfileViewModelCubit(this.getProfileDataUseCase, this.updateProfileDataUseCase) : super(ProfileViewModelInitial());
+
+  static ProfileViewModelCubit get(context) => BlocProvider.of(context);
 
   fetchData() async {
     emit(ProfileViewModelOnLoading());
@@ -34,5 +37,12 @@ class ProfileViewModelCubit extends Cubit<ProfileViewModelState> {
     }, (error) {
       emit(ProfileViewModelOnError(error));
     });
+  }
+
+  void showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => LanguageBottomSheetWidget(),
+    );
   }
 }
