@@ -63,14 +63,14 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
 
   int numOfItem = 0;
   addToCart({required String productId}) async {
-    emit(CartOnLoading());
+    emit(CartOnLoading(productId));
     var result = await addToCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
       numOfItem = cartResponseEntity.numOfCartItems?.toInt() ?? 0;
       debugPrint('$numOfItem');
-      emit(CartOnSuccess(cartResponseEntity));
+      emit(CartOnSuccess(cartResponseEntity, productId));
     }, (error) {
-      emit(CartOnError(error));
+      emit(CartOnError(error, productId));
     });
   }
 
@@ -129,15 +129,22 @@ class MostSellingOnError extends HomeInitiateState {
   MostSellingOnError(this.errorMsg);
 }
 
-final class CartOnLoading extends HomeInitiateState {}
+final class CartOnLoading extends HomeInitiateState {
+  String productId;
+
+  CartOnLoading(this.productId);
+}
 
 final class CartOnError extends HomeInitiateState {
   final String? errorMsg;
-  CartOnError(this.errorMsg);
+  String productId;
+
+  CartOnError(this.errorMsg, this.productId);
 }
 
 final class CartOnSuccess extends HomeInitiateState {
   final CartResponseEntity? cartResponseEntity;
+  String productId;
 
-  CartOnSuccess(this.cartResponseEntity);
+  CartOnSuccess(this.cartResponseEntity, this.productId);
 }

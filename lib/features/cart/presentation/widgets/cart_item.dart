@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cubit.dart';
@@ -15,8 +14,6 @@ class CartItem extends StatelessWidget {
   int counter = 0;
 
   CartItem({Key? key, required this.cartItemEntity}) : super(key: key);
-
-  CartCubit viewModel = getIt();
 
   @override
   Widget build(BuildContext context) {
