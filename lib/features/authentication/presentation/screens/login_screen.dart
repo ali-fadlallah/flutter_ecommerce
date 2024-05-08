@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/constants/regex.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_auth_text_field.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_button.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/routes/routes_manager.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_in/signin_view_model_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
 
                     if (state is SignInViewModelOnSuccess) {
-                      Navigator.pushNamedAndRemoveUntil(context, RoutesManager.homeRouteName, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.homeRouteName, (route) => false);
                       ShowToast.showSuccess(StringsManager.loggedSuccessfully);
                     }
                   },
@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, RoutesManager.registerRouteName);
+                      Navigator.pushNamed(context, PageRoutesNames.registerRouteName);
                     },
                   ),
                 ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/config/routes/my_routes.dart';
-import 'package:flutter_ecommerce_app/core/utils/routes/routes_manager.dart';
+import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
+import 'package:flutter_ecommerce_app/config/routes/routes.dart';
 import 'package:flutter_ecommerce_app/features/profile/presentation/manager/locale_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'config/custom_theme/dark_theme.dart';
-import 'config/custom_theme/light_theme.dart';
+import 'config/app_theme/dark_theme.dart';
+import 'config/app_theme/light_theme.dart';
 import 'core/utils/strings/strings_manager.dart';
 
 class MyApp extends StatelessWidget {
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
               title: StringsManager.appName,
               theme: MyLightTheme.lightTheme,
               darkTheme: MyDarkTheme.darkTheme,
-              initialRoute: RoutesManager.splashScreenRouteName,
-              onGenerateRoute: MyRoutes.onGenerateRoute,
+              initialRoute: PageRoutesNames.splashScreenRouteName,
+              onGenerateRoute: Routes.onGenerateRoute,
               // routes: {
               //   RoutesManager.homeRouteName: (context) => HomeScreen(),
               //   RoutesManager.splashScreenRouteName: (context) => SplashScreen(),

@@ -40,8 +40,14 @@ class StringsManager {
   static const String yourMobileNumber = 'Your Mobile Number';
   static const String submit = 'Submit';
   static const String checkOut = 'CheckOut';
+  static const String addToCart = 'Add to cart';
+  static const String sold = 'Sold';
+  static const String description = 'Description';
+  static const String showMore = 'Show more';
+  static const String showLess = 'Show less';
   static const String totalPrice = 'Total Price';
   static const String cartCleared = 'The cart has been cleared successfully';
+  static const String productDetails = 'Product Details';
 
   ///Connections Response
   static String success = "Connected Successfully";

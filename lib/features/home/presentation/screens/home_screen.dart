@@ -5,20 +5,16 @@ import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_vi
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/utils/routes/routes_manager.dart';
+import '../../../../config/routes/page_routes_name.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final HomeTabViewModel viewModelTab = getIt<HomeTabViewModel>();
-
-  // final HomeViewModel viewModel = getIt<HomeViewModel>();
-
   @override
   void initState() {
     super.initState();
@@ -34,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            centerTitle: false,
             title: SvgPicture.asset(
               AssetsManager.appBarLogo,
               height: 22.h,
@@ -42,14 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               IconButton(
                 onPressed: () async {
-                  final result = await Navigator.pushNamed(context, RoutesManager.cartRouteName);
+                  final result = await Navigator.pushNamed(context, PageRoutesNames.cartRouteName);
                   if (result != null && mounted) {
                     HomeViewModel.get(context).getCartCount();
                   }
                 },
                 icon: Badge(
                   label: Text('${HomeViewModel.get(context).numOfItem}'),
-                  child: Icon(Icons.shopping_cart),
+                  child: const Icon(Icons.shopping_cart),
                 ),
               ),
             ],

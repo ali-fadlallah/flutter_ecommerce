@@ -24,12 +24,14 @@ dependencies:
   google_fonts: ^6.2.0
   fluttertoast: ^8.2.5
   shared_preferences: ^2.2.3
-#  connectivity_plus: ^6.0.3
+  #  connectivity_plus: ^6.0.3
   internet_connection_checker: ^1.0.0+1
   flutter_localizations:
     sdk: flutter
   intl: any
   animate_do: ^3.3.4
+  flutter_image_slideshow: ^0.1.6
+  readmore: ^3.0.0
 
 dev_dependencies:
   injectable_generator:

@@ -9,7 +9,7 @@ import '../widgets/cart_check_out.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
-  CartScreen({Key? key}) : super(key: key);
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,18 @@ class CartScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: const Text(StringsManager.cart),
-            centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
               onPressed: () => Navigator.pop(context, true),
             ),
             actions: [
               BlocBuilder<CartCubit, CartState>(
+                buildWhen: (previous, current) {
+                  if (current is GetCartOnSuccess) return true;
+                  if (current is EmptyCartOnSuccess) return true;
+                  if (current is ClearCartOnSuccess) return true;
+                  return false;
+                },
                 builder: (context, state) {
                   if (state is GetCartOnSuccess) {
                     return IconButton(
@@ -39,7 +44,14 @@ class CartScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: BlocBuilder<CartCubit, CartState>(
+          body: BlocConsumer<CartCubit, CartState>(
+            listener: (BuildContext context, CartState state) {},
+            buildWhen: (previous, current) {
+              if (current is UpdateCountLoadingState || current is DeleteItemLoadingState) {
+                return false;
+              }
+              return true;
+            },
             builder: (context, state) {
               if (state is GetCartOnSuccess) {
                 return Container(
@@ -62,9 +74,9 @@ class CartScreen extends StatelessWidget {
                 );
               }
               if (state is EmptyCartOnSuccess || state is ClearCartOnSuccess) {
-                return Center(child: Text(StringsManager.noItemsAvailable));
+                return const Center(child: Text(StringsManager.noItemsAvailable));
               }
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             },

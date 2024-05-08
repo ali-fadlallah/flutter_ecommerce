@@ -33,7 +33,17 @@ class UpdateCountSuccessState extends CartState {
   UpdateCountSuccessState({required this.responseEntity});
 }
 
-class UpdateCountLoadingState extends CartState {}
+class UpdateCountLoadingState extends CartState {
+  final String? productID;
+
+  UpdateCountLoadingState(this.productID);
+}
+
+class CartCountChanged extends CartState {
+  final int? theNewNumber;
+
+  CartCountChanged(this.theNewNumber);
+}
 
 class UpdateCountErrorState extends CartState {
   final String? errorMsg;
@@ -47,7 +57,11 @@ class DeleteSuccessState extends CartState {
   DeleteSuccessState({required this.responseEntity});
 }
 
-class DeleteItemLoadingState extends CartState {}
+class DeleteItemLoadingState extends CartState {
+  final String? productID;
+
+  DeleteItemLoadingState(this.productID);
+}
 
 class DeleteItemErrorState extends CartState {
   final String? errorMsg;

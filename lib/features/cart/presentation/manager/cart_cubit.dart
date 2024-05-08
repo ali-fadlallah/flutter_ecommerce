@@ -41,24 +41,25 @@ class CartCubit extends Cubit<CartState> {
   }
 
   updateCart({required String productId, required String count}) async {
-    emit(UpdateCountLoadingState());
+    emit(UpdateCountLoadingState(productId));
     var result = await updateCartUseCase.call(productId: productId, count: count);
     result?.fold((cartResponseEntity) {
-      if (cartResponseEntity.data?.products?.length == 0) {
+      if (cartResponseEntity.data!.products!.isEmpty) {
         emit(EmptyCartOnSuccess());
       } else {
         emit(GetCartOnSuccess(cartResponseEntity));
       }
     }, (errorMsg) {
+      print(errorMsg);
       emit(UpdateCountErrorState(errorMsg));
     });
   }
 
   deleteItemCart({required String productId}) async {
-    emit(DeleteItemLoadingState());
+    emit(DeleteItemLoadingState(productId));
     var result = await deleteCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
-      if (cartResponseEntity.data?.products?.length == 0) {
+      if (cartResponseEntity.data!.products!.isEmpty) {
         emit(EmptyCartOnSuccess());
       } else {
         emit(GetCartOnSuccess(cartResponseEntity));
@@ -79,5 +80,20 @@ class CartCubit extends Cubit<CartState> {
     }, (errorMsg) {
       emit(DeleteItemErrorState(errorMsg));
     });
+  }
+
+  int current = 1;
+
+  increase({required int theCurrentNumber}) {
+    current = theCurrentNumber;
+    current++;
+    emit(CartCountChanged(theCurrentNumber));
+  }
+
+  decrease({required int theCurrentNumber}) {
+    current = theCurrentNumber;
+    theCurrentNumber--;
+    current = theCurrentNumber;
+    emit(CartCountChanged(theCurrentNumber));
   }
 }

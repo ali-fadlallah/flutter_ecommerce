@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cubit.dart';
@@ -56,7 +57,7 @@ class CartItem extends StatelessWidget {
                 Text(
                   cartItemEntity?.product?.title ?? '',
                   style: Theme.of(context).textTheme.headlineMedium,
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
@@ -70,54 +71,82 @@ class CartItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
-                child: IconButton(
-                  onPressed: () {
-                    CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    if (state is DeleteItemLoadingState && state.productID == cartItemEntity?.product?.id) {
+                      return Container(
+                        width: 40.w,
+                        height: 40.h,
+                        margin: REdgeInsets.all(8),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return IconButton(
+                      onPressed: () {
+                        CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
+                      },
+                      icon: SvgPicture.asset(
+                        AssetsManager.iconDeleteCartItem,
+                        width: 24.w,
+                        height: 24.w,
+                      ),
+                    );
                   },
-                  icon: SvgPicture.asset(
-                    AssetsManager.iconDeleteCartItem,
-                    width: 24.w,
-                    height: 24.w,
-                  ),
                 ),
               ),
               Expanded(
-                child: Container(
-                  margin: REdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          counter = cartItemEntity?.count?.toInt() ?? 0;
-                          counter--;
-                          if (counter <= 0) {
-                            CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
-                          } else {
-                            CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
-                          }
-                        },
-                        icon: SvgPicture.asset(AssetsManager.iconSubStractCartItem),
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    if (state is UpdateCountLoadingState && state.productID == cartItemEntity?.product?.id) {
+                      return Container(
+                        width: 40.w,
+                        height: 40.h,
+                        margin: REdgeInsets.all(8),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return Container(
+                      margin: REdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
-                      Text(
-                        '${cartItemEntity?.count?.toInt() ?? 0}',
-                        style: Theme.of(context).textTheme.labelMedium,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              counter = cartItemEntity?.count?.toInt() ?? 0;
+                              counter--;
+                              if (counter <= 0) {
+                                CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
+                              } else {
+                                CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
+                              }
+                            },
+                            icon: SvgPicture.asset(AssetsManager.iconSubStractCartItem),
+                          ),
+                          Text(
+                            '${cartItemEntity?.count?.toInt() ?? 0}',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              counter = cartItemEntity?.count?.toInt() ?? 0;
+                              counter++;
+                              CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
+                            },
+                            icon: SvgPicture.asset(AssetsManager.iconAddCartItem),
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          counter = cartItemEntity?.count?.toInt() ?? 0;
-                          counter++;
-                          CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
-                        },
-                        icon: SvgPicture.asset(AssetsManager.iconAddCartItem),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               )
             ],

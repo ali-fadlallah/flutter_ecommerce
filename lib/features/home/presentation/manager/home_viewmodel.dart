@@ -18,7 +18,7 @@ import '../screens/home_tab.dart';
 
 @injectable
 class HomeViewModel extends Cubit<HomeInitiateState> {
-  final List<Widget> widgetsList = [const HomeTab(), const CategoriesTab(), const WishListTab(), ProfileTab()];
+  final List<Widget> widgetsList = [const HomeTab(), const CategoriesTab(), const WishListTab(), const ProfileTab()];
 
   static HomeViewModel get(context) => BlocProvider.of(context);
   AddToCartUseCase addToCartUseCase;
@@ -26,12 +26,16 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
   GetBrandsUseCase getBrandsUseCase;
 
   GetCartUseCase getCartUseCase;
-
   GetMostSellingProductsUseCase getMostSellingProductsUseCase;
 
   @factoryMethod
-  HomeViewModel(this.getCategoryUseCase, this.getBrandsUseCase, this.getMostSellingProductsUseCase, this.addToCartUseCase, this.getCartUseCase)
-      : super(CategoriesOnLoading());
+  HomeViewModel(
+    this.getCategoryUseCase,
+    this.getBrandsUseCase,
+    this.getMostSellingProductsUseCase,
+    this.addToCartUseCase,
+    this.getCartUseCase,
+  ) : super(CategoriesOnLoading());
 
   getCategories() async {
     emit(CategoriesOnLoading());
@@ -98,6 +102,20 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
 sealed class HomeInitiateState {}
 
 class HomeTabChanged extends HomeInitiateState {}
+
+class EmptyCartOnSuccess extends HomeInitiateState {}
+
+class UpdateCountLoadingState extends HomeInitiateState {
+  final String? productId;
+
+  UpdateCountLoadingState(this.productId);
+}
+
+class UpdateCountErrorState extends HomeInitiateState {
+  final String? errorMsg;
+
+  UpdateCountErrorState(this.errorMsg);
+}
 
 class HomeInitiate extends HomeInitiateState {}
 

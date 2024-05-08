@@ -42,7 +42,7 @@ class ProfileViewModelCubit extends Cubit<ProfileViewModelState> {
   void showLanguageBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => LanguageBottomSheetWidget(),
+      builder: (context) => const LanguageBottomSheetWidget(),
     );
   }
 }
