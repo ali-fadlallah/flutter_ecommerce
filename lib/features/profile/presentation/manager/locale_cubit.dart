@@ -6,7 +6,12 @@ import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
-  LocaleCubit() : super(SelectedLocale(const Locale('en')));
+  LocaleCubit()
+      : super(SelectedLocale(
+          const Locale('en'),
+        ));
+
+  static LocaleCubit get(context) => BlocProvider.of(context);
 
   void toArabic(BuildContext context) {
     emit(SelectedLocale(const Locale('ar')));
@@ -22,8 +27,10 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   void retrieveLanguage() {
     final savedLanguage = SharedPreferenceHelper.getData(key: StringsManager.keyLocale);
-    if (savedLanguage != null) {
-      emit(SelectedLocale(Locale(savedLanguage.toString())));
-    }
+    savedLanguage == null
+        ? SharedPreferenceHelper.saveData(key: StringsManager.keyLocale, value: 'en')
+        : emit(SelectedLocale(Locale(
+            savedLanguage.toString(),
+          )));
   }
 }

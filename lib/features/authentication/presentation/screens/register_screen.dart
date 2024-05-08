@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
-import 'package:flutter_ecommerce_app/core/utils/routes/routes_manager.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_up/signup_viewmodel_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -164,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ShowToast.showError(state.errorMsg ?? '');
                     }
                     if (state is SignupViewModelOnSuccess) {
-                      Navigator.pushNamedAndRemoveUntil(context, RoutesManager.homeRouteName, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.homeRouteName, (route) => false);
                       ShowToast.showSuccess(StringsManager.loggedSuccessfully);
                     }
                   },

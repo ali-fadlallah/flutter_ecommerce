@@ -10,11 +10,12 @@ class MyLightTheme {
       color: ColorsManager.primaryColor,
     ),
     appBarTheme: const AppBarTheme(
-      scrolledUnderElevation: 0,
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
-    ),
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        actionsIconTheme: IconThemeData(color: ColorsManager.primaryColor),
+        centerTitle: true),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.primaryColor,
       showSelectedLabels: false,

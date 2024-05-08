@@ -5,8 +5,8 @@ import 'package:flutter_ecommerce_app/features/splash_screen/presentation/manage
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../config/routes/page_routes_name.dart';
 import '../../../../core/local/shared_preference_helper.dart';
-import '../../../../core/utils/routes/routes_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,8 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
     SplashScreenViewModel().delay().then((_) {
       // Navigate to your next screen after delay
       SharedPreferenceHelper.getData(key: StringsManager.keyToken) == null
-          ? Navigator.pushNamedAndRemoveUntil(context, RoutesManager.loginRouteName, (route) => false)
-          : Navigator.pushNamedAndRemoveUntil(context, RoutesManager.homeRouteName, (route) => false);
+          ? Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.loginRouteName, (route) => false)
+          : Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.homeRouteName, (route) => false);
     });
   }
 

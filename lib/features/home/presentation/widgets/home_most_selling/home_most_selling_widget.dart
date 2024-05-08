@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/core/reusable_components/product_entity_item.dart';
+import 'package:flutter_ecommerce_app/core/reusable_components/product_item.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,7 +40,7 @@ class _HomeMostSellingWidgetState extends State<HomeMostSellingWidget> {
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return ProductEntityItem(productEntity: state.mostSellingList[index]);
+                  return ProductItem(productEntity: state.mostSellingList[index]);
                 },
                 separatorBuilder: (context, index) => SizedBox(
                       width: 20.w,

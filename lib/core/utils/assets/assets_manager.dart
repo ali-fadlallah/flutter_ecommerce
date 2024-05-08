@@ -20,4 +20,5 @@ class AssetsManager {
   static const String iconDeleteCartItem = 'assets/images/svg_ic_delete.svg';
   static const String iconSubStractCartItem = 'assets/images/svg_ic_substract.svg';
   static const String iconAddCartItem = 'assets/images/svg_ic_add.svg';
+  static const String iconStar = 'assets/images/svg_star.svg';
 }

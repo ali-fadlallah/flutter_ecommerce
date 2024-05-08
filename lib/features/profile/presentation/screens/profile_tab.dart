@@ -65,11 +65,6 @@ class _ProfileTabState extends State<ProfileTab> {
                         IconButton(
                             onPressed: () {
                               ProfileViewModelCubit.get(context).showLanguageBottomSheet(context);
-                              // if (SharedPreferenceHelper.getData(key: StringsManager.keyLocale) == 'ar') {
-                              //   BlocProvider.of<LocaleCubit>(context).toEnglish();
-                              // } else {
-                              //   BlocProvider.of<LocaleCubit>(context).toArabic();
-                              // }
                             },
                             icon: const Icon(Icons.translate)),
                       ],
