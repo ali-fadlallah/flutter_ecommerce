@@ -32,6 +32,7 @@ dependencies:
   animate_do: ^3.3.4
   flutter_image_slideshow: ^0.1.6
   readmore: ^3.0.0
+  fawry_sdk: ^2.0.8
 
 dev_dependencies:
   injectable_generator:
