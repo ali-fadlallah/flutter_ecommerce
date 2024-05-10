@@ -44,6 +44,8 @@ class StringsManager {
   static const String sold = 'Sold';
   static const String description = 'Description';
   static const String showMore = 'Show more';
+  static const String paymentComplete = 'Payment Complete';
+  static const String paymentError = 'Payment Error';
   static const String showLess = 'Show less';
   static const String totalPrice = 'Total Price';
   static const String cartCleared = 'The cart has been cleared successfully';

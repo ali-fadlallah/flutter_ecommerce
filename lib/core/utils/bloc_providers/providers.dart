@@ -8,7 +8,7 @@ import '../../di/di.dart';
 class BlocProviders {
   static final List<BlocProvider> providers = [
     BlocProvider<LocaleCubit>(create: (_) => LocaleCubit()..retrieveLanguage()),
-    BlocProvider<HomeViewModel>(create: (context) => getIt()),
-    BlocProvider<CartCubit>(create: (context) => getIt()),
+    BlocProvider<HomeViewModel>(create: (_) => getIt()),
+    BlocProvider<CartCubit>(create: (_) => getIt()),
   ];
 }

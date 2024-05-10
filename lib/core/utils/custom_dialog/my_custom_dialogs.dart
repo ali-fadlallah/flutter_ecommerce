@@ -30,24 +30,22 @@ class MyCustomDialogs {
       String? positiveTitle,
       void Function()? positiveClick,
       String? negativeTitle,
+      bool dismissible = false,
       void Function()? negativeClick}) {
     showDialog(
       context: context,
+      barrierDismissible: dismissible,
       builder: (context) => AlertDialog(
         content: Text(message),
         actions: [
           if (positiveTitle != null)
             TextButton(
-              onPressed: () {
-                positiveClick ?? ();
-              },
+              onPressed: positiveClick,
               child: Text(positiveTitle),
             ),
           if (negativeTitle != null)
             TextButton(
-              onPressed: () {
-                negativeClick ?? ();
-              },
+              onPressed: negativeClick,
               child: Text(negativeTitle),
             ),
         ],
