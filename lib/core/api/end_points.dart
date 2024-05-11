@@ -13,4 +13,5 @@ class EndPoints {
 
   static String deleteCart(String productId) => '/api/v1/cart/$productId';
   static String clearCart = '/api/v1/cart';
+  static String wishList = '/api/v1/wishlist';
 }

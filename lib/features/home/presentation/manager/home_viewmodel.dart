@@ -27,7 +27,6 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
 
   GetCartUseCase getCartUseCase;
   GetMostSellingProductsUseCase getMostSellingProductsUseCase;
-
   @factoryMethod
   HomeViewModel(
     this.getCategoryUseCase,
