@@ -5,6 +5,8 @@ import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
+import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_cubit.dart';
+import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,9 +53,26 @@ class ProductItem extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(AssetsManager.imgWishList),
+                BlocConsumer<WishListCubit, WishListState>(
+                  listener: (context, state) {
+                    if (state is WishListOnSuccess && state.productId == productEntity.id) {
+                      ShowToast.showSuccess(state.wishListEntity?.message ?? '');
+                    }
+                    if (state is WishListOnError) {
+                      ShowToast.showError(state.errorMsg ?? '');
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is WishListOnLoading && state.productId == productEntity.id) {
+                      return SizedBox(width: 30.w, height: 30.h, child: const CircularProgressIndicator());
+                    }
+                    return InkWell(
+                      onTap: () {
+                        WishListCubit.get(context).addToWishList(productId: productEntity.id ?? '');
+                      },
+                      child: SvgPicture.asset(AssetsManager.imgWishList),
+                    );
+                  },
                 ),
               ],
             ),
