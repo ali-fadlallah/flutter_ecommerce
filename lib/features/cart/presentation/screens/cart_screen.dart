@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cubit.dart';
+import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/cart_check_out.dart';
@@ -25,17 +26,18 @@ class CartScreen extends StatelessWidget {
             actions: [
               BlocBuilder<CartCubit, CartState>(
                 buildWhen: (previous, current) {
-                  if (current is GetCartOnSuccess) return true;
-                  if (current is EmptyCartOnSuccess) return true;
+                  if (current is CartScreenOnSuccess) return true;
+                  if (current is EmptyScreenCartSuccess) return true;
                   if (current is ClearCartOnSuccess) return true;
                   return false;
                 },
                 builder: (context, state) {
-                  if (state is GetCartOnSuccess) {
+                  if (state is CartScreenOnSuccess) {
                     return IconButton(
                       icon: const Icon(Icons.remove_shopping_cart, color: Colors.redAccent),
                       onPressed: () {
                         CartCubit.get(context).clearCart();
+                        context.read<HomeViewModel>().getCartCount();
                       },
                     );
                   }
@@ -47,13 +49,13 @@ class CartScreen extends StatelessWidget {
           body: BlocConsumer<CartCubit, CartState>(
             listener: (BuildContext context, CartState state) {},
             buildWhen: (previous, current) {
-              if (current is UpdateCountLoadingState || current is DeleteItemLoadingState) {
+              if (current is UpdateCountScreenLoadingState || current is DeleteItemLoadingState) {
                 return false;
               }
               return true;
             },
             builder: (context, state) {
-              if (state is GetCartOnSuccess) {
+              if (state is CartScreenOnSuccess) {
                 return Container(
                   padding: REdgeInsets.all(16),
                   child: Column(
@@ -73,7 +75,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 );
               }
-              if (state is EmptyCartOnSuccess || state is ClearCartOnSuccess) {
+              if (state is EmptyScreenCartSuccess || state is ClearCartOnSuccess) {
                 return const Center(child: Text(StringsManager.noItemsAvailable));
               }
               return const Center(

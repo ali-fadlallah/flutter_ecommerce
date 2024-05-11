@@ -27,27 +27,27 @@ class CartCubit extends Cubit<CartState> {
   // late CartResponseEntity cartResponse;
 
   getCart() async {
-    emit(CartOnLoading());
+    emit(CartScreenOnLoading());
     var result = await getCartUseCase.call();
     result?.fold((cartResponseEntity) {
       if (cartResponseEntity.statusMsg == 'fail' || cartResponseEntity.data?.products?.length == null || cartResponseEntity.numOfCartItems == 0) {
-        emit(EmptyCartOnSuccess());
+        emit(EmptyScreenCartSuccess());
       } else {
-        emit(GetCartOnSuccess(cartResponseEntity));
+        emit(CartScreenOnSuccess(cartResponseEntity));
       }
     }, (errorMsg) {
-      emit(CartOnError(errorMsg));
+      emit(CartScreenOnError(errorMsg));
     });
   }
 
   updateCart({required String productId, required String count}) async {
-    emit(UpdateCountLoadingState(productId));
+    emit(UpdateCountScreenLoadingState(productId));
     var result = await updateCartUseCase.call(productId: productId, count: count);
     result?.fold((cartResponseEntity) {
       if (cartResponseEntity.data!.products!.isEmpty) {
-        emit(EmptyCartOnSuccess());
+        emit(EmptyScreenCartSuccess());
       } else {
-        emit(GetCartOnSuccess(cartResponseEntity));
+        emit(CartScreenOnSuccess(cartResponseEntity));
       }
     }, (errorMsg) {
       print(errorMsg);
@@ -60,9 +60,9 @@ class CartCubit extends Cubit<CartState> {
     var result = await deleteCartUseCase.call(productId: productId);
     result?.fold((cartResponseEntity) {
       if (cartResponseEntity.data!.products!.isEmpty) {
-        emit(EmptyCartOnSuccess());
+        emit(EmptyScreenCartSuccess());
       } else {
-        emit(GetCartOnSuccess(cartResponseEntity));
+        emit(CartScreenOnSuccess(cartResponseEntity));
       }
     }, (errorMsg) {
       emit(DeleteItemErrorState(errorMsg));
@@ -87,13 +87,13 @@ class CartCubit extends Cubit<CartState> {
   increase({required int theCurrentNumber}) {
     current = theCurrentNumber;
     current++;
-    emit(CartCountChanged(theCurrentNumber));
+    emit(CartScreenCountChanged(theCurrentNumber));
   }
 
   decrease({required int theCurrentNumber}) {
     current = theCurrentNumber;
     theCurrentNumber--;
     current = theCurrentNumber;
-    emit(CartCountChanged(theCurrentNumber));
+    emit(CartScreenCountChanged(theCurrentNumber));
   }
 }

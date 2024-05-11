@@ -5,21 +5,21 @@ sealed class CartState {}
 
 final class CartInitial extends CartState {}
 
-final class CartOnLoading extends CartState {}
+final class CartScreenOnLoading extends CartState {}
 
-final class CartOnError extends CartState {
+final class CartScreenOnError extends CartState {
   final String? errorMsg;
 
-  CartOnError(this.errorMsg);
+  CartScreenOnError(this.errorMsg);
 }
 
-final class GetCartOnSuccess extends CartState {
+final class CartScreenOnSuccess extends CartState {
   final CartResponseEntity? cartResponseEntity;
 
-  GetCartOnSuccess(this.cartResponseEntity);
+  CartScreenOnSuccess(this.cartResponseEntity);
 }
 
-final class EmptyCartOnSuccess extends CartState {}
+final class EmptyScreenCartSuccess extends CartState {}
 
 final class CartCountUpdated extends CartState {
   final int? theNumber;
@@ -33,16 +33,16 @@ class UpdateCountSuccessState extends CartState {
   UpdateCountSuccessState({required this.responseEntity});
 }
 
-class UpdateCountLoadingState extends CartState {
+class UpdateCountScreenLoadingState extends CartState {
   final String? productID;
 
-  UpdateCountLoadingState(this.productID);
+  UpdateCountScreenLoadingState(this.productID);
 }
 
-class CartCountChanged extends CartState {
+class CartScreenCountChanged extends CartState {
   final int? theNewNumber;
 
-  CartCountChanged(this.theNewNumber);
+  CartScreenCountChanged(this.theNewNumber);
 }
 
 class UpdateCountErrorState extends CartState {

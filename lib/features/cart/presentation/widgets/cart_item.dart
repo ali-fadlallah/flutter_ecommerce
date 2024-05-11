@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cu
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../home/presentation/manager/home_viewmodel.dart';
 import '../../domain/entities/CartItemEntity.dart';
 
 class CartItem extends StatelessWidget {
@@ -86,6 +87,7 @@ class CartItem extends StatelessWidget {
                     return IconButton(
                       onPressed: () {
                         CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
+                        context.read<HomeViewModel>().getCartCount();
                       },
                       icon: SvgPicture.asset(
                         AssetsManager.iconDeleteCartItem,
@@ -99,7 +101,7 @@ class CartItem extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<CartCubit, CartState>(
                   builder: (context, state) {
-                    if (state is UpdateCountLoadingState && state.productID == cartItemEntity?.product?.id) {
+                    if (state is UpdateCountScreenLoadingState && state.productID == cartItemEntity?.product?.id) {
                       return Container(
                         width: 40.w,
                         height: 40.h,
@@ -124,6 +126,7 @@ class CartItem extends StatelessWidget {
                               counter--;
                               if (counter <= 0) {
                                 CartCubit.get(context).deleteItemCart(productId: cartItemEntity?.product?.id ?? '');
+                                context.read<HomeViewModel>().getCartCount();
                               } else {
                                 CartCubit.get(context).updateCart(productId: cartItemEntity?.product?.id ?? '', count: counter.toString());
                               }
