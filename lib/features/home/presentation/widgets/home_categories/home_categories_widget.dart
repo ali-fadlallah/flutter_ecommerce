@@ -18,7 +18,7 @@ class HomeCategoriesWidget extends StatelessWidget {
           child: GridView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: categoryList.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {

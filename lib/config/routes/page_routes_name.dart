@@ -1,4 +1,5 @@
 class PageRoutesNames {
+  static const String offlineScreenRouteName = '/offline_screen';
   static const String splashScreenRouteName = '/splash_screen';
   static const String homeRouteName = '/home';
   static const String loginRouteName = '/login_screen';

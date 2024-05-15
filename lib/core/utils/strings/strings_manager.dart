@@ -50,6 +50,8 @@ class StringsManager {
   static const String totalPrice = 'Total Price';
   static const String cartCleared = 'The cart has been cleared successfully';
   static const String productDetails = 'Product Details';
+  static const String youAreOffline = 'You\'re offline!';
+  static const String youAreOnline = 'You\'re online!';
 
   ///Connections Response
   static String success = "Connected Successfully";
@@ -62,7 +64,7 @@ class StringsManager {
   static String timeoutError = "timeout, try again later";
   static String defaultError = "Error";
   static String cacheError = "cache error";
-  static String noInternetError = "No Internet";
+  static String noInternetError = "NoInternet";
 
   ///Connections Response
 }

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_ecommerce_app/core/network/internet_checker.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_in/signin_view_model_state.dart';
 import 'package:injectable/injectable.dart';
@@ -13,14 +14,16 @@ class SignInViewModelCubit extends Cubit<SignInViewModelState> {
   SignInViewModelCubit(this.signInAuthUseCase) : super(SignInViewModelInitial());
 
   void signIn(String email, String password) async {
-    emit(SignInViewModelOnLoading());
-    var result = await signInAuthUseCase.callSignIn(email: email, password: password);
-    result?.fold((authEntity) {
-      emit(SignInViewModelOnSuccess(authEntity));
-      SharedPreferenceHelper.saveData(key: StringsManager.keyToken, value: authEntity.token ?? '');
-    }, (error) {
-      emit(SignInViewModelOnError(error));
-    });
+    if (await CheckInternetConnection.checkConnectivity()) {
+      emit(SignInViewModelOnLoading());
+      var result = await signInAuthUseCase.callSignIn(email: email, password: password);
+      result?.fold((authEntity) {
+        emit(SignInViewModelOnSuccess(authEntity));
+        SharedPreferenceHelper.saveData(key: StringsManager.keyToken, value: authEntity.token ?? '');
+      }, (error) {
+        emit(SignInViewModelOnError(error));
+      });
+    }
   }
 
   bool passwordVisible = true;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/colors/colors_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/custom_dialog/my_custom_dialogs.dart';
 import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/sub_categories/presentation/screens/subcategory_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,15 +40,15 @@ class _CategoriesTabState extends State<CategoriesTab> {
       },
       listener: (context, state) {
         if (state is CategoriesTabViewModelOnError || state is CategoriesTabViewModelOnSuccess || state is CategoriesTabViewModelOnLoading) {
-          if (state is CategoriesTabViewModelOnLoading) {
-            MyCustomDialogs.showLoadingDialog(context: context, text: StringsManager.loadingAlertDialog);
-          }
+          // if (state is CategoriesTabViewModelOnLoading) {
+          //   MyCustomDialogs.showLoadingDialog(context: context, text: StringsManager.loadingAlertDialog);
+          // }
 
-          if (state is CategoriesTabViewModelOnError) {
-            MyCustomDialogs.showMessageDialog(context: context, message: state.error ?? '');
-          }
+          // if (state is CategoriesTabViewModelOnError) {
+          //   MyCustomDialogs.showMessageDialog(context: context, message: state.error ?? '');
+          // }
           if (state is CategoriesTabViewModelOnSuccess) {
-            MyCustomDialogs.hideLoadingDialog(context: context);
+            // MyCustomDialogs.hideLoadingDialog(context: context);
             viewModel.getSpecificSubCategory(state.categoryEntityList[viewModel.selectedIndex].id ?? '');
           }
         }
