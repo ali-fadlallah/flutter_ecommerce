@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
-import 'package:flutter_ecommerce_app/core/utils/custom_dialog/my_custom_dialogs.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 
 import 'home_categories_widget.dart';
@@ -38,20 +36,20 @@ class _HomeCategoriesState extends State<HomeCategories> {
       },
       listener: (context, state) {
         if (state is CategoriesOnLoading) {
-          MyCustomDialogs.showLoadingDialog(context: context, text: StringsManager.loadingAlertDialog);
+          // MyCustomDialogs.showLoadingDialog(context: context, text: StringsManager.loadingAlertDialog);
         }
         if (state is CategoriesOnError) {
-          MyCustomDialogs.showMessageDialog(
-            context: context,
-            message: state.errorMsg ?? '',
-            positiveTitle: StringsManager.okAlertDialog,
-            positiveClick: () {
-              MyCustomDialogs.hideLoadingDialog(context: context);
-            },
-          );
+          // MyCustomDialogs.showMessageDialog(
+          //   context: context,
+          //   message: state.errorMsg ?? '',
+          //   positiveTitle: StringsManager.okAlertDialog,
+          //   positiveClick: () {
+          //     MyCustomDialogs.hideLoadingDialog(context: context);
+          //   },
+          // );
         }
         if (state is CategoriesOnSuccess) {
-          MyCustomDialogs.hideLoadingDialog(context: context);
+          // MyCustomDialogs.hideLoadingDialog(context: context);
         }
       },
       buildWhen: (previous, current) {

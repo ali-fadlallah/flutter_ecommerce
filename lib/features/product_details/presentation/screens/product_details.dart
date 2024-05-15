@@ -13,16 +13,16 @@ import '../../../../core/utils/assets/assets_manager.dart';
 import '../../../cart/presentation/manager/cart_cubit.dart';
 
 class ProductDetails extends StatelessWidget {
-  ProductEntity productEntity;
+  final ProductEntity productEntity;
 
-  ProductDetails({Key? key, required this.productEntity}) : super(key: key);
+  const ProductDetails({Key? key, required this.productEntity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text(StringsManager.productDetails),
+        title: const Text(StringsManager.productDetails),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
           onPressed: () => Navigator.pop(context),
@@ -75,7 +75,7 @@ class ProductDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   productEntity.priceAfterDiscount != null
                       ? '${StringsManager.EGP} ${productEntity.priceAfterDiscount} '
@@ -163,7 +163,7 @@ class ProductDetails extends StatelessWidget {
                   colorClickableText: Colors.red,
                   trimCollapsedText: ' ${StringsManager.showMore}',
                   trimExpandedText: ' ${StringsManager.showLess}',
-                  moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -197,7 +197,7 @@ class ProductDetails extends StatelessWidget {
                         return SizedBox(
                           width: 30.w,
                           height: 48.h,
-                          child: Center(child: CircularProgressIndicator()),
+                          child: const Center(child: CircularProgressIndicator()),
                         );
                       }
                       return ElevatedButton(

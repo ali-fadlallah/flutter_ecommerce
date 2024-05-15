@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_cubit.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_state.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/widgets/wish_list_item.dart';
@@ -16,16 +17,20 @@ class WishListTab extends StatelessWidget {
       bloc: getIt<WishListCubit>()..getWishList(),
       builder: (context, state) {
         if (state is GetWishListOnSuccess) {
-          return ListView.separated(
-              itemBuilder: (context, index) {
-                return WishListItem(productEntity: state.productEntity?[index]);
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                    height: 24.h,
-                  ),
-              itemCount: state.productEntity?.length ?? 0);
+          return state.productEntity!.isEmpty
+              ? const Center(
+                  child: Text(StringsManager.noItemsAvailable),
+                )
+              : ListView.separated(
+                  itemBuilder: (context, index) {
+                    return WishListItem(productEntity: state.productEntity?[index]);
+                  },
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 24.h,
+                      ),
+                  itemCount: state.productEntity?.length ?? 0);
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

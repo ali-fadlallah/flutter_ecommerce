@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/core/connectivity/test/connectivity_cubit.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_cubit.dart';
 
 import '../../../features/cart/presentation/manager/cart_cubit.dart';
@@ -9,6 +10,7 @@ import '../../di/di.dart';
 class BlocProviders {
   static final List<BlocProvider> providers = [
     BlocProvider<LocaleCubit>(create: (_) => LocaleCubit()..retrieveLanguage()),
+    BlocProvider<ConnectivityCubit>(create: (_) => ConnectivityCubit()..trackConnectivityChange()),
     BlocProvider<HomeViewModel>(create: (_) => getIt()),
     BlocProvider<CartCubit>(create: (_) => getIt()),
     BlocProvider<WishListCubit>(create: (_) => getIt()),

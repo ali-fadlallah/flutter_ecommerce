@@ -11,6 +11,10 @@ class ApiManager {
     dio = Dio(
       BaseOptions(
         baseUrl: ApiBaseUrl.baseUrl,
+        // receiveDataWhenStatusError: true,
+        // receiveTimeout: const Duration(milliseconds: 30000),
+        // sendTimeout: const Duration(milliseconds: 30000),
+        // followRedirects: false,
         validateStatus: (status) {
           if (status! < 500) {
             return true;
@@ -20,6 +24,11 @@ class ApiManager {
         },
       ),
     );
+    // dio?.interceptors.add(PrettyDioLogger(
+    //      requestHeader: true,
+    //      requestBody: true,
+    //      responseHeader: true,
+    //     ));
   }
 
   Future<Response> getRequest({required String endPoint, Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers}) async {

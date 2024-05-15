@@ -27,7 +27,6 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controllerFullName = TextEditingController();
     controllerEmail = TextEditingController();

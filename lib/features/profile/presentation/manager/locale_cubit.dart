@@ -7,20 +7,20 @@ part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
   LocaleCubit()
-      : super(SelectedLocale(
-          const Locale('en'),
+      : super(const SelectedLocale(
+          Locale('en'),
         ));
 
   static LocaleCubit get(context) => BlocProvider.of(context);
 
   void toArabic(BuildContext context) {
-    emit(SelectedLocale(const Locale('ar')));
+    emit(const SelectedLocale(Locale('ar')));
     SharedPreferenceHelper.saveData(key: StringsManager.keyLocale, value: 'ar');
     Navigator.pop(context);
   }
 
   void toEnglish(BuildContext context) {
-    emit(SelectedLocale(const Locale('en')));
+    emit(const SelectedLocale(Locale('en')));
     SharedPreferenceHelper.saveData(key: StringsManager.keyLocale, value: 'en');
     Navigator.pop(context);
   }

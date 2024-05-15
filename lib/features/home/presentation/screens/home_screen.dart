@@ -85,10 +85,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          body: Container(
-            padding: REdgeInsets.all(10),
-            child: HomeViewModel.get(context).widgetsList[HomeViewModel.get(context).currentIndex],
-          ),
+          body: state is CategoriesOnLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  padding: REdgeInsets.all(10),
+                  child: HomeViewModel.get(context).widgetsList[HomeViewModel.get(context).currentIndex],
+                ),
         );
       },
     );
