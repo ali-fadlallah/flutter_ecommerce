@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/home/domain/entities/products_entity/ProductEntity.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +18,7 @@ class WishListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 113.h,
+      height: 130.h,
       decoration: BoxDecoration(
         border: Border.all(
           width: 2.w,
@@ -64,16 +64,18 @@ class WishListItem extends StatelessWidget {
                   children: [
                     Text(
                       productEntity?.priceAfterDiscount != null
-                          ? '${StringsManager.EGP} ${productEntity?.priceAfterDiscount} '
-                          : '${StringsManager.EGP} ${productEntity?.price}',
+                          ? '${AppLocalizations.of(context)!.egp} ${productEntity?.priceAfterDiscount} '
+                          : '${AppLocalizations.of(context)!.egp} ${productEntity?.price}',
                     ),
-                    Text(
-                      productEntity?.priceAfterDiscount != null ? '${productEntity?.price} ${StringsManager.EGP}' : '',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
-                        decoration: TextDecoration.lineThrough,
-                        decorationStyle: TextDecorationStyle.solid,
-                        decorationColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+                    Expanded(
+                      child: Text(
+                        productEntity?.priceAfterDiscount != null ? '${productEntity?.price} ${AppLocalizations.of(context)!.egp}' : '',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+                          decoration: TextDecoration.lineThrough,
+                          decorationStyle: TextDecorationStyle.solid,
+                          decorationColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
+                        ),
                       ),
                     ),
                   ],
@@ -120,7 +122,7 @@ class WishListItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: Text(
-                          StringsManager.addToCart,
+                          AppLocalizations.of(context)!.addToCart,
                           style: Theme.of(context).textTheme.labelSmall!.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

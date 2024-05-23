@@ -6,8 +6,8 @@ import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_auth_text_field.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_button.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_in/signin_view_model_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -69,24 +69,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 71.h,
                 ),
                 Text(
-                  StringsManager.welcomeBackToRoute,
+                  AppLocalizations.of(context)!.welcomeBackToRoute,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 Text(
-                  StringsManager.pleaseSignInWithYourMail,
+                  AppLocalizations.of(context)!.pleaseSignInWithYourMail,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 SizedBox(
                   height: 40.h,
                 ),
                 CustomAuthTextField(
-                  textFieldLabel: StringsManager.email,
+                  textFieldLabel: AppLocalizations.of(context)!.email,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  hintText: StringsManager.enterYourEmailAddress,
+                  hintText: AppLocalizations.of(context)!.enterYourEmailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty || CustomRegex.isValidEmail(value) == false) {
-                      return StringsManager.enterValidEmail;
+                      return AppLocalizations.of(context)!.enterValidEmail;
                     }
                     return null;
                   },
@@ -98,9 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   bloc: viewModelSignIn,
                   builder: (context, state) {
                     return CustomAuthTextField(
-                      textFieldLabel: StringsManager.password,
+                      textFieldLabel: AppLocalizations.of(context)!.password,
                       controller: passwordController,
-                      hintText: StringsManager.enterYourPassword,
+                      hintText: AppLocalizations.of(context)!.enterYourPassword,
                       secureText: viewModelSignIn.passwordVisible,
                       passwordIconVisibility: GestureDetector(
                         onTap: () {
@@ -113,10 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return StringsManager.enterValidPassword;
+                          return AppLocalizations.of(context)!.enterValidPassword;
                         }
                         if (value.length < 6) {
-                          return StringsManager.weakPassword;
+                          return AppLocalizations.of(context)!.weakPassword;
                         }
                         return null;
                       },
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    StringsManager.forgotPassword,
+                    AppLocalizations.of(context)!.forgotPassword,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     if (state is SignInViewModelOnSuccess) {
                       Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.homeRouteName, (route) => false);
-                      ShowToast.showSuccess(StringsManager.loggedSuccessfully);
+                      ShowToast.showSuccess(AppLocalizations.of(context)!.loggedSuccessfully);
                     }
                   },
                   builder: (context, state) {
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                     return CustomButton(
                       textStyle: Theme.of(context).textTheme.headlineMedium,
-                      buttonTitle: StringsManager.login,
+                      buttonTitle: AppLocalizations.of(context)!.login,
                       onItemPressed: () {
                         if (formKey.currentState!.validate()) {
                           viewModelSignIn.signIn(emailController.text, passwordController.text);
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   child: TextButton(
                     child: Text(
-                      StringsManager.doNotHaveAccount,
+                      AppLocalizations.of(context)!.doNotHaveAccount,
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     onPressed: () {

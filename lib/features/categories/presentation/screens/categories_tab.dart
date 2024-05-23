@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/utils/colors/colors_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/sub_categories/presentation/screens/subcategory_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../manager/categories_tab_view_model_cubit.dart';
@@ -41,7 +41,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
       listener: (context, state) {
         if (state is CategoriesTabViewModelOnError || state is CategoriesTabViewModelOnSuccess || state is CategoriesTabViewModelOnLoading) {
           // if (state is CategoriesTabViewModelOnLoading) {
-          //   MyCustomDialogs.showLoadingDialog(context: context, text: StringsManager.loadingAlertDialog);
+          //   MyCustomDialogs.showLoadingDialog(context: context, text: AppLocalizations.of(context)!.loadingAlertDialog);
           // }
 
           // if (state is CategoriesTabViewModelOnError) {
@@ -115,7 +115,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
                       return state.subcategoryEntityList.isEmpty
                           ? Center(
                               child: Text(
-                                StringsManager.noItemsAvailable,
+                                AppLocalizations.of(context)!.noItemsAvailable,
                                 style: Theme.of(context).textTheme.headlineMedium,
                               ),
                             )

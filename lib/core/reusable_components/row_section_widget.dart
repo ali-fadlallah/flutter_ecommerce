@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../utils/strings/strings_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RowSectionWidget extends StatelessWidget {
   final String sectionName;
@@ -20,7 +19,7 @@ class RowSectionWidget extends StatelessWidget {
             print(sectionName);
           },
           child: Text(
-            StringsManager.viewAll,
+            AppLocalizations.of(context)!.viewAll,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),

@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,7 +62,7 @@ class CartItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${StringsManager.EGP} ${cartItemEntity?.price?.toInt() ?? 0}',
+                  '${AppLocalizations.of(context)!.egp} ${cartItemEntity?.price?.toInt() ?? 0}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
