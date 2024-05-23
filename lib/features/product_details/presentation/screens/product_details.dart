@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/home/domain/entities/products_entity/ProductEntity.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart' as ViewModel;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +22,7 @@ class ProductDetails extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text(StringsManager.productDetails),
+        title: Text(AppLocalizations.of(context)!.productDetails),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
           onPressed: () => Navigator.pop(context),
@@ -78,8 +78,8 @@ class ProductDetails extends StatelessWidget {
                 const Spacer(),
                 Text(
                   productEntity.priceAfterDiscount != null
-                      ? '${StringsManager.EGP} ${productEntity.priceAfterDiscount} '
-                      : '${StringsManager.EGP} ${productEntity.price}',
+                      ? '${AppLocalizations.of(context)!.egp} ${productEntity.priceAfterDiscount} '
+                      : '${AppLocalizations.of(context)!.egp} ${productEntity.price}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
@@ -97,7 +97,7 @@ class ProductDetails extends StatelessWidget {
                   ),
                   padding: REdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Text(
-                    '${productEntity.sold} ${StringsManager.sold}',
+                    '${productEntity.sold} ${AppLocalizations.of(context)!.sold}',
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),
@@ -148,7 +148,7 @@ class ProductDetails extends StatelessWidget {
               height: 16.h,
             ),
             Text(
-              '${StringsManager.description}',
+              '${AppLocalizations.of(context)!.description}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             SizedBox(
@@ -161,8 +161,8 @@ class ProductDetails extends StatelessWidget {
                   trimMode: TrimMode.Line,
                   trimLines: 5,
                   colorClickableText: Colors.red,
-                  trimCollapsedText: ' ${StringsManager.showMore}',
-                  trimExpandedText: ' ${StringsManager.showLess}',
+                  trimCollapsedText: ' ${AppLocalizations.of(context)!.showMore}',
+                  trimExpandedText: ' ${AppLocalizations.of(context)!.showLess}',
                   moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -172,7 +172,7 @@ class ProductDetails extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      StringsManager.totalPrice,
+                      AppLocalizations.of(context)!.totalPrice,
                       style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontSize: 20.sp,
                             color: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
@@ -180,8 +180,8 @@ class ProductDetails extends StatelessWidget {
                     ),
                     Text(
                       productEntity.priceAfterDiscount != null
-                          ? '${StringsManager.EGP} ${productEntity.priceAfterDiscount} '
-                          : '${StringsManager.EGP} ${productEntity.price}',
+                          ? '${AppLocalizations.of(context)!.egp} ${productEntity.priceAfterDiscount} '
+                          : '${AppLocalizations.of(context)!.egp} ${productEntity.price}',
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
@@ -216,7 +216,7 @@ class ProductDetails extends StatelessWidget {
                               height: 48.h,
                             ),
                             Text(
-                              StringsManager.addToCart,
+                              AppLocalizations.of(context)!.addToCart,
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ],

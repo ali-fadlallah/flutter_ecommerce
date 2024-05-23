@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/connectivity/screen/offline_screen.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/features/home/domain/entities/products_entity/ProductEntity.dart';
 import 'package:flutter_ecommerce_app/features/product_details/presentation/screens/product_details.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../features/authentication/presentation/screens/login_screen.dart';
 import '../../features/authentication/presentation/screens/register_screen.dart';
@@ -35,9 +35,9 @@ class Routes {
         });
       default:
         return MaterialPageRoute(builder: (context) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text(StringsManager.noRouteFound),
+              child: Text(AppLocalizations.of(context)!.noRouteFound),
             ),
           );
         });

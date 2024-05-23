@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/features/authentication/presentation/manager/sign_up/signup_viewmodel_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,7 +11,6 @@ import '../../../../core/constants/regex.dart';
 import '../../../../core/reusable_components/custom_auth_text_field.dart';
 import '../../../../core/reusable_components/custom_button.dart';
 import '../../../../core/utils/assets/assets_manager.dart';
-import '../../../../core/utils/strings/strings_manager.dart';
 import '../../../../core/utils/toast/show_toast.dart';
 import '../manager/sign_up/signup_viewmodel_state.dart';
 
@@ -74,13 +74,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 40.h,
                 ),
                 CustomAuthTextField(
-                  textFieldLabel: StringsManager.fullName,
+                  textFieldLabel: AppLocalizations.of(context)!.fullName,
                   controller: fullNameController,
                   keyboardType: TextInputType.name,
-                  hintText: StringsManager.enterYourFullName,
+                  hintText: AppLocalizations.of(context)!.enterYourFullName,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return StringsManager.enterYourFullName;
+                      return AppLocalizations.of(context)!.enterYourFullName;
                     }
                     return null;
                   },
@@ -89,17 +89,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 30.h,
                 ),
                 CustomAuthTextField(
-                  textFieldLabel: StringsManager.mobileNumber,
+                  textFieldLabel: AppLocalizations.of(context)!.mobileNumber,
                   controller: mobileController,
-                  hintText: StringsManager.enterYourMobile,
+                  hintText: AppLocalizations.of(context)!.enterYourMobile,
                   keyboardType: TextInputType.phone,
                   maxLength: 11,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return StringsManager.enterYourMobile;
+                      return AppLocalizations.of(context)!.enterYourMobile;
                     }
                     if (CustomRegex.isMobile(value) == false) {
-                      return StringsManager.enterValidMobile;
+                      return AppLocalizations.of(context)!.enterValidMobile;
                     }
                     return null;
                   },
@@ -108,13 +108,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 30.h,
                 ),
                 CustomAuthTextField(
-                  textFieldLabel: StringsManager.email,
+                  textFieldLabel: AppLocalizations.of(context)!.email,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  hintText: StringsManager.enterYourEmailAddress,
+                  hintText: AppLocalizations.of(context)!.enterYourEmailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty || CustomRegex.isValidEmail(value) == false) {
-                      return StringsManager.enterValidEmail;
+                      return AppLocalizations.of(context)!.enterValidEmail;
                     }
                     return null;
                   },
@@ -126,9 +126,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   bloc: viewModel,
                   builder: (context, state) {
                     return CustomAuthTextField(
-                      textFieldLabel: StringsManager.password,
+                      textFieldLabel: AppLocalizations.of(context)!.password,
                       controller: passwordController,
-                      hintText: StringsManager.enterYourPassword,
+                      hintText: AppLocalizations.of(context)!.enterYourPassword,
                       secureText: viewModel.passwordVisible,
                       passwordIconVisibility: GestureDetector(
                         onTap: () {
@@ -141,10 +141,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return StringsManager.enterValidPassword;
+                          return AppLocalizations.of(context)!.enterValidPassword;
                         }
                         if (value.length < 6) {
-                          return StringsManager.weakPassword;
+                          return AppLocalizations.of(context)!.weakPassword;
                         }
                         return null;
                       },
@@ -165,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                     if (state is SignupViewModelOnSuccess) {
                       Navigator.pushNamedAndRemoveUntil(context, PageRoutesNames.homeRouteName, (route) => false);
-                      ShowToast.showSuccess(StringsManager.loggedSuccessfully);
+                      ShowToast.showSuccess(AppLocalizations.of(context)!.loggedSuccessfully);
                     }
                   },
                   builder: (context, state) {
@@ -178,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                     return CustomButton(
                       textStyle: Theme.of(context).textTheme.headlineMedium,
-                      buttonTitle: StringsManager.signUp,
+                      buttonTitle: AppLocalizations.of(context)!.signUp,
                       onItemPressed: () {
                         if (formKey.currentState!.validate()) {
                           viewModel.signUp(

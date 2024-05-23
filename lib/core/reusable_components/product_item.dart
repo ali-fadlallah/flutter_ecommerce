@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/utils/assets/assets_manager.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_cubit.dart';
 import 'package:flutter_ecommerce_app/features/wishlist/presentation/manager/wish_list_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -97,11 +97,11 @@ class ProductItem extends StatelessWidget {
                     children: [
                       Text(
                         productEntity.priceAfterDiscount != null
-                            ? '${StringsManager.EGP} ${productEntity.priceAfterDiscount} '
-                            : '${StringsManager.EGP} ${productEntity.price}',
+                            ? '${AppLocalizations.of(context)!.egp} ${productEntity.priceAfterDiscount} '
+                            : '${AppLocalizations.of(context)!.egp} ${productEntity.price}',
                       ),
                       Text(
-                        productEntity.priceAfterDiscount != null ? '${productEntity.price} ${StringsManager.EGP}' : '',
+                        productEntity.priceAfterDiscount != null ? '${productEntity.price} ${AppLocalizations.of(context)!.egp}' : '',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
                           decoration: TextDecoration.lineThrough,

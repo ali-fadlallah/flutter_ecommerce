@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/row_section_widget.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/home_ads/home_ads.dart';
@@ -26,7 +26,7 @@ class _HomeTabState extends State<HomeTab> {
         SliverToBoxAdapter(
           child: SizedBox(height: 16.h),
         ),
-        const SliverToBoxAdapter(child: RowSectionWidget(sectionName: StringsManager.categories)),
+        SliverToBoxAdapter(child: RowSectionWidget(sectionName: AppLocalizations.of(context)!.categories)),
         SliverToBoxAdapter(
           child: SizedBox(height: 16.h),
         ),
@@ -36,14 +36,14 @@ class _HomeTabState extends State<HomeTab> {
         SliverToBoxAdapter(
           child: SizedBox(height: 16.h),
         ),
-        const SliverToBoxAdapter(child: RowSectionWidget(sectionName: StringsManager.brands)),
+        SliverToBoxAdapter(child: RowSectionWidget(sectionName: AppLocalizations.of(context)!.brands)),
         const SliverToBoxAdapter(
           child: HomeBrands(),
         ),
         SliverToBoxAdapter(
           child: SizedBox(height: 16.h),
         ),
-        const SliverToBoxAdapter(child: RowSectionWidget(sectionName: StringsManager.mostSelling)),
+        SliverToBoxAdapter(child: RowSectionWidget(sectionName: AppLocalizations.of(context)!.mostSelling)),
         SliverToBoxAdapter(
           child: SizedBox(height: 16.h),
         ),

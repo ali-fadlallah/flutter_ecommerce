@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
 import 'package:flutter_ecommerce_app/core/utils/custom_dialog/my_custom_dialogs.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/fawry_gateway/presentation/manager/fawry_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../fawry_gateway/presentation/manager/fawry_cubit.dart';
@@ -43,14 +43,14 @@ class _CartCheckOutState extends State<CartCheckOut> {
             child: Column(
               children: [
                 Text(
-                  StringsManager.totalPrice,
+                  AppLocalizations.of(context)!.totalPrice,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                         fontSize: 20.sp,
                         color: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
                       ),
                 ),
                 Text(
-                  '${StringsManager.EGP} ${widget.totalAmount ?? 0}',
+                  '${AppLocalizations.of(context)!.egp} ${widget.totalAmount ?? 0}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
@@ -64,8 +64,8 @@ class _CartCheckOutState extends State<CartCheckOut> {
                 if (state is FawrySuccess) {
                   MyCustomDialogs.showMessageDialog(
                     context: context,
-                    message: StringsManager.paymentComplete,
-                    positiveTitle: StringsManager.okAlertDialog,
+                    message: AppLocalizations.of(context)!.paymentComplete,
+                    positiveTitle: AppLocalizations.of(context)!.okAlertDialog,
                     positiveClick: () {
                       Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(
@@ -79,8 +79,8 @@ class _CartCheckOutState extends State<CartCheckOut> {
                 if (state is FawryError) {
                   MyCustomDialogs.showMessageDialog(
                     context: context,
-                    message: StringsManager.paymentError,
-                    positiveTitle: StringsManager.okAlertDialog,
+                    message: AppLocalizations.of(context)!.paymentError,
+                    positiveTitle: AppLocalizations.of(context)!.okAlertDialog,
                     positiveClick: () {
                       Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(
@@ -108,7 +108,7 @@ class _CartCheckOutState extends State<CartCheckOut> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        StringsManager.checkOut,
+                        AppLocalizations.of(context)!.checkOut,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       SizedBox(

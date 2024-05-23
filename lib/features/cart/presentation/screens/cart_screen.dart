@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
 import 'package:flutter_ecommerce_app/features/cart/presentation/manager/cart_cubit.dart';
 import 'package:flutter_ecommerce_app/features/home/presentation/manager/home_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/cart_check_out.dart';
@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
         create: (context) => getIt<CartCubit>()..getCart(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(StringsManager.cart),
+            title: Text(AppLocalizations.of(context)!.cart),
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
               onPressed: () => Navigator.pop(context, true),
@@ -76,7 +76,7 @@ class CartScreen extends StatelessWidget {
                 );
               }
               if (state is EmptyScreenCartSuccess || state is ClearCartOnSuccess) {
-                return const Center(child: Text(StringsManager.noItemsAvailable));
+                return Center(child: Text(AppLocalizations.of(context)!.noItemsAvailable));
               }
               return const Center(
                 child: CircularProgressIndicator(),

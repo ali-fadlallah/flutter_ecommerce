@@ -9,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/regex.dart';
-import '../../../../core/utils/strings/strings_manager.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -58,7 +57,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${StringsManager.welcome} ${state.authEntity.user?.name?.split(' ')[0]}',
+                          '${AppLocalizations.of(context)!.welcome} ${state.authEntity.user?.name?.split(' ')[0]}',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         IconButton(
@@ -79,12 +78,12 @@ class _ProfileTabState extends State<ProfileTab> {
                             animate: true,
                             delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
-                              textFieldLabel: StringsManager.yourFullName,
+                              textFieldLabel: AppLocalizations.of(context)!.yourFullName,
                               controller: controllerFullName..text = state.authEntity.user?.name ?? '',
                               validator: (value) {
                                 value = value?.trim();
                                 if (value == null || value.isEmpty) {
-                                  return StringsManager.enterYourFullName;
+                                  return AppLocalizations.of(context)!.enterYourFullName;
                                 }
                                 return null;
                               },
@@ -97,12 +96,12 @@ class _ProfileTabState extends State<ProfileTab> {
                             animate: true,
                             delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
-                              textFieldLabel: StringsManager.yourEmail,
+                              textFieldLabel: AppLocalizations.of(context)!.yourEmail,
                               controller: controllerEmail..text = state.authEntity.user?.email ?? '',
                               hintText: state.authEntity.user?.email ?? '',
                               validator: (value) {
                                 if (value == null || value.isEmpty || CustomRegex.isValidEmail(value) == false) {
-                                  return StringsManager.enterValidEmail;
+                                  return AppLocalizations.of(context)!.enterValidEmail;
                                 }
                                 return null;
                               },
@@ -115,12 +114,12 @@ class _ProfileTabState extends State<ProfileTab> {
                             animate: true,
                             delay: const Duration(seconds: 1),
                             child: CustomProfileTextField(
-                              textFieldLabel: StringsManager.yourMobileNumber,
+                              textFieldLabel: AppLocalizations.of(context)!.yourMobileNumber,
                               controller: controllerMobile,
-                              hintText: StringsManager.enterYourMobile,
+                              hintText: AppLocalizations.of(context)!.enterYourMobile,
                               validator: (value) {
                                 if (value == null || value.isEmpty || CustomRegex.isMobile(value) == false) {
-                                  return StringsManager.enterValidMobile;
+                                  return AppLocalizations.of(context)!.enterValidMobile;
                                 }
                                 return null;
                               },

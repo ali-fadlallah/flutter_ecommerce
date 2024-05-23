@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/connectivity/test/connectivity_cubit.dart';
 import 'package:flutter_ecommerce_app/core/utils/snackbar_global/SnackbarGlobal.dart';
-import 'package:flutter_ecommerce_app/core/utils/strings/strings_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConnectivityWrapper extends StatefulWidget {
   final Widget child;
@@ -33,10 +33,10 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
     return BlocListener<ConnectivityCubit, ConnectivityStatus>(
       listener: (context, state) {
         if (_previousStatus == ConnectivityStatus.disconnected && state == ConnectivityStatus.connected) {
-          SnackBarGlobal.showGreen(StringsManager.youAreOnline);
+          SnackBarGlobal.showGreen(AppLocalizations.of(context)!.youAreOnline);
         }
         if (_previousStatus == ConnectivityStatus.connected && state == ConnectivityStatus.disconnected) {
-          SnackBarGlobal.showRed(StringsManager.youAreOffline);
+          SnackBarGlobal.showRed(AppLocalizations.of(context)!.youAreOffline);
         }
         _previousStatus = state;
       },
