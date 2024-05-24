@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/constants/regex.dart';
+import '../../../../core/constants/my_regex.dart';
 import '../../../../core/reusable_components/custom_auth_text_field.dart';
 import '../../../../core/reusable_components/custom_button.dart';
 import '../../../../core/utils/assets/assets_manager.dart';
