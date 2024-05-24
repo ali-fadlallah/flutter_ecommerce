@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/config/routes/page_routes_name.dart';
-import 'package:flutter_ecommerce_app/core/constants/regex.dart';
+import 'package:flutter_ecommerce_app/core/constants/my_regex.dart';
 import 'package:flutter_ecommerce_app/core/di/di.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_auth_text_field.dart';
 import 'package:flutter_ecommerce_app/core/reusable_components/custom_button.dart';

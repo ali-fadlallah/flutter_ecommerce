@@ -8,7 +8,7 @@ import 'package:flutter_ecommerce_app/features/profile/presentation/manager/prof
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/regex.dart';
+import '../../../../core/constants/my_regex.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
