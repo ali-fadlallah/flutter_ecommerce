@@ -1,12 +1,21 @@
 class StringsManager {
   static const String appName = 'E-Commerce';
-  static const String categories = 'Categories';
-  static const String viewAll = 'view all';
-  static const String brands = 'Brands';
-  static const String mostSelling = 'MostSelling';
-  static const String okAlertDialog = 'OK';
-  static const String loadingAlertDialog = 'Loading...';
+  static const String keyToken = 'token';
+  static const String keyLocale = 'locale';
   static const String connectionError = 'An error has occurred. Something went wrong. Please try again later.';
-  static const String EGP = 'EGP';
-  static const String noItemsAvailable = 'No Items Available';
+
+  ///Connections Response
+  static String success = "Connected Successfully";
+  static String noContent = "Sorry, No data";
+  static String badRequestError = "Bad Request";
+  static String unauthorizedError = "Sorry, you are unauthorized";
+  static String forbiddenError = "data forbidden";
+  static String internalServerError = "Server error, try again later";
+  static String notFoundError = "not found";
+  static String timeoutError = "timeout, try again later";
+  static String defaultError = "Error";
+  static String cacheError = "cache error";
+  static String noInternetError = "NoInternet";
+
+  ///Connections Response
 }

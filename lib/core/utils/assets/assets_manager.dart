@@ -17,4 +17,9 @@ class AssetsManager {
   static const String iconWishlistUnSelected = 'assets/images/ic_wishlist_un_selected.svg';
   static const String iconProfileSelected = 'assets/images/ic_profile_selected.svg';
   static const String iconProfileUnSelected = 'assets/images/ic_profile_un_selected.svg';
+  static const String iconDeleteCartItem = 'assets/images/svg_ic_delete.svg';
+  static const String iconSubStractCartItem = 'assets/images/svg_ic_substract.svg';
+  static const String iconAddCartItem = 'assets/images/svg_ic_add.svg';
+  static const String iconStar = 'assets/images/svg_star.svg';
+  static const String iconWishList = 'assets/images/svg_wish_list.svg';
 }
