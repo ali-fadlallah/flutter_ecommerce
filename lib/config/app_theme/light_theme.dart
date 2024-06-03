@@ -28,6 +28,16 @@ class MyLightTheme {
         fontWeight: FontWeight.w400,
         color: ColorsManager.secondaryColor,
       ),
+      labelLarge: TextStyle(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
       headlineMedium: TextStyle(
         fontSize: 18.sp,
         fontWeight: FontWeight.w500,

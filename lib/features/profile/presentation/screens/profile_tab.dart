@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_app/features/profile/presentation/manager/prof
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../config/routes/page_routes_name.dart';
 import '../../../../core/constants/my_regex.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -53,6 +54,19 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    FadeInLeft(
+                      animate: true,
+                      delay: const Duration(seconds: 1),
+                      child: CustomButton(
+                        textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white),
+                        height: 55.h,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        buttonTitle: AppLocalizations.of(context)!.addNewAddresses,
+                        onItemPressed: () {
+                          Navigator.pushNamed(context, PageRoutesNames.addressesLocationRouteName);
+                        },
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

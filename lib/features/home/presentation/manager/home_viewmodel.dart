@@ -79,7 +79,7 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
     });
   }
 
-  int currentIndex = 0;
+  int currentIndex = 3;
 
   setCurrentIndex(int newIndex) {
     currentIndex = newIndex;
