@@ -4,23 +4,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 typedef Validator = String? Function(String?)?;
 
 class CustomProfileTextField extends StatelessWidget {
-  final String textFieldLabel;
+  final String? textFieldLabel;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final bool secureText;
   final String? hintText;
+  final String? labelText;
   final int? maxLength;
   final Widget? editIcon;
   final Validator validator;
 
+  final Widget? suffixIcon;
+
   const CustomProfileTextField({
     super.key,
-    required this.textFieldLabel,
+    this.textFieldLabel,
     required this.controller,
     this.hintText,
     this.keyboardType,
     this.maxLength,
     this.editIcon,
+    this.labelText,
+    this.suffixIcon,
     required this.validator,
     this.secureText = false,
   });
@@ -31,16 +36,14 @@ class CustomProfileTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          textFieldLabel,
+          textFieldLabel ?? "",
           style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        SizedBox(
-          height: 15.h,
         ),
         TextFormField(
           decoration: InputDecoration(
-            suffixIcon: Icon(Icons.edit, color: Theme.of(context).colorScheme.primary),
+            suffixIcon: suffixIcon,
             hintText: hintText,
+            labelText: labelText,
             hintStyle: Theme.of(context).textTheme.labelSmall,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(

@@ -61,5 +61,20 @@
   "timeoutError": "Timeout, try again later",
   "defaultError": "Error",
   "cacheError": "Cache error",
-  "noInternetError": "No Internet"
+  "noInternetError": "No Internet",
+  "addNewAddresses": "Add New Address",
+  "permissionsAreNotAllowed": "Permissions are not allowed",
+  "goToSettings": "Go to settings",
+  "back": "back",
+  "confirmAddress": "Confirm Address",
+  "selectDeliveryLocation": "Select Delivery Location",
+  "yourLocationHere": "Your Location Here",
+  "addressName": "Address Name Ex. Home",
+  "streetName": "Street Name",
+  "phoneNumber": "Phone Number",
+  "buildingNo": "Building No.",
+  "floorNumber": "Floor Number",
+  "apartmentNo": "Apartment No.",
+  "landmark": "Landmark",
+  "makeAsDefaultAddress": "Make as default address?"
 }

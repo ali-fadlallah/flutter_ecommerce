@@ -61,5 +61,20 @@
   "timeoutError": "انتهت المهلة، حاول مرة أخرى لاحقًا",
   "defaultError": "خطأ",
   "cacheError": "خطأ في ذاكرة التخزين المؤقت",
-  "noInternetError": "لا يوجد اتصال بالإنترنت"
+  "noInternetError": "لا يوجد اتصال بالإنترنت",
+  "addNewAddresses": "إضافه عنوان جديد",
+  "permissionsAreNotAllowed": "الإذن غير مسموح به",
+  "goToSettings": "الانتقال إلى الإعدادات",
+  "back": "الرجوع",
+  "confirmAddress": "تاكيد العنوان",
+  "selectDeliveryLocation": "حدد عنوان التوصيل",
+  "yourLocationHere": "مكانك هنا!",
+  "addressName": "اسم العنوان مثال: المنزل",
+  "streetName": "اسم الشارع",
+  "phoneNumber": "رقم الهاتف",
+  "buildingNo": "رقم المبنى",
+  "floorNumber": "رقم الطابق",
+  "apartmentNo": "رقم الشقة",
+  "landmark": "علامة مميزة",
+  "makeAsDefaultAddress": "تعيين كعنوان افتراضي؟"
 }

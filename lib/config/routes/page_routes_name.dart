@@ -6,4 +6,5 @@ class PageRoutesNames {
   static const String registerRouteName = '/register_screen';
   static const String cartRouteName = '/cart';
   static const String productDetailsRouteName = '/product_details';
+  static const String addressesLocationRouteName = '/address_location';
 }
