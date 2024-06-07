@@ -3,6 +3,8 @@ class StringsManager {
   static const String keyToken = 'token';
   static const String keyLocale = 'locale';
   static const String connectionError = 'An error has occurred. Something went wrong. Please try again later.';
+  static const String clientID = 'com.route.flutterEcommerceApp-service';
+  static const String redirectUrl = 'https://trite-fourth-raven.glitch.me/callbacks/sign_in_with_apple';
 
   ///Connections Response
   static String success = "Connected Successfully";
