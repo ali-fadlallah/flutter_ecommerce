@@ -22,4 +22,8 @@ class AssetsManager {
   static const String iconAddCartItem = 'assets/images/svg_ic_add.svg';
   static const String iconStar = 'assets/images/svg_star.svg';
   static const String iconWishList = 'assets/images/svg_wish_list.svg';
+  static const String imgGoogleSignIn = 'assets/images/google_sign_in.png';
+  static const String svgGoogleSignIn = 'assets/images/google_sign_in.svg';
+  static const String svgAppleSignIn = 'assets/images/apple_sign_in.svg';
+  static const String imgAppleSignIn = 'assets/images/apple_sign_in.png';
 }

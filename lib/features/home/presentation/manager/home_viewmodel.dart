@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/features/cart/domain/use_cases/get_cart_use_case.dart';
 import 'package:injectable/injectable.dart';
@@ -79,7 +79,7 @@ class HomeViewModel extends Cubit<HomeInitiateState> {
     });
   }
 
-  int currentIndex = 3;
+  int currentIndex = 0;
 
   setCurrentIndex(int newIndex) {
     currentIndex = newIndex;
