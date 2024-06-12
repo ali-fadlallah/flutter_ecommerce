@@ -1,10 +1,11 @@
 import 'package:flutter_ecommerce_app/config/routes/routes.dart';
-import 'package:flutter_ecommerce_app/core/utils/snackbar_global/SnackbarGlobalger/locale_cubit.dart';
 
 import 'config/app_theme/dark_theme.dart';
 import 'config/app_theme/light_theme.dart';
 import 'core/connectivity/wrapper/connectivity_wrapper.dart';
 import 'core/global/global_imports.dart';
+import 'core/utils/snackbar_global/SnackbarGlobal.dart';
+import 'features/profile/presentation/manager/locale_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
