@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Scan your card to add it automatically</string>
+    <key>NSCameraUsageDescription
+    &lt;string&gt;To scan cards&lt;/string&gt;</key>
+    <string>To scan cards</string>
     <key>GIDClientID</key>
-    <!-- TODO Replace this value: -->
     <!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
     <string>897442395547-7htplu11rh87d5olna13helipnd5j64n.apps.googleusercontent.com</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

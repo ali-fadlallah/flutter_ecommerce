@@ -1,5 +1,6 @@
 {
   "@@locale": "ar",
+  "appName": "اسم التطبيق",
   "profile": "الملف الشخصي",
   "submit": "إرسال",
   "welcomeBackToRoute": "مرحباً بك في روت",

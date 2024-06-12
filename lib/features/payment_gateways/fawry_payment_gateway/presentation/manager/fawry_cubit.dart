@@ -9,12 +9,9 @@ import 'package:fawry_sdk/model/launch_customer_model.dart';
 import 'package:fawry_sdk/model/launch_merchant_model.dart';
 import 'package:fawry_sdk/model/payment_methods.dart';
 import 'package:fawry_sdk/model/response.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/features/fawry_gateway/constants/fawry_constant.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../../../../core/local/shared_preference_helper.dart';
-import '../../../../core/utils/strings/strings_manager.dart';
+import '../../../../../core/global/global_imports.dart';
 import 'fawry_state.dart';
 
 class FawryCubit extends Cubit<FawryState> {
@@ -27,7 +24,7 @@ class FawryCubit extends Cubit<FawryState> {
     try {
       await FawrySDK.instance.startPayment(
         launchModel: model,
-        baseURL: FawryConstants.baseUrl,
+        baseURL: dotenv.get('FAWRY_BASE_URL', fallback: null),
         lang: SharedPreferenceHelper.getData(key: StringsManager.keyLocale).toString() == 'ar' ? FawrySDK.LANGUAGE_ARABIC : FawrySDK.LANGUAGE_ENGLISH,
       );
       emit(FawryInitialSuccess());
@@ -80,9 +77,9 @@ class FawryCubit extends Cubit<FawryState> {
 
   static LaunchMerchantModel getMerchantModel() {
     return LaunchMerchantModel(
-      merchantCode: FawryConstants.merchantCode,
+      merchantCode: dotenv.get('FAWRY_MERCHANT_CODE', fallback: null),
       merchantRefNum: FawryUtils.randomAlphaNumeric(10),
-      secureKey: FawryConstants.secureKey,
+      secureKey: dotenv.get('FAWRY_SECURE_KEY', fallback: null),
     );
   }
 

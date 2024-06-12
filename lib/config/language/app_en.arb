@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "appName": "Your App Name",
   "profile": "Profile",
   "submit": "Submit",
   "welcomeBackToRoute": "Welcome Back To Route",
