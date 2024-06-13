@@ -48,6 +48,7 @@ class _MapScreenState extends State<MapScreen> {
                   onMapCreated: (controller) => _mapScreenCubit.controller = controller,
                   onCameraMove: _mapScreenCubit.onCameraMove,
                   zoomControlsEnabled: false,
+                  myLocationButtonEnabled: false,
                   onTap: (LatLng position) {
                     _mapScreenCubit.updateCurrentPosition(position);
                   },
