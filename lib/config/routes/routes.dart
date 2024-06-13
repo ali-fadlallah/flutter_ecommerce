@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/features/home/domain/entities/products_ent
 import 'package:flutter_ecommerce_app/features/product_details/presentation/screens/product_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../features/Addresses/presentation/screens/map_screen.dart';
 import '../../features/authentication/presentation/screens/login_screen.dart';
 import '../../features/authentication/presentation/screens/register_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
@@ -26,6 +27,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const RegisterScreen());
       case PageRoutesNames.cartRouteName:
         return MaterialPageRoute(builder: (context) => const CartScreen());
+      case PageRoutesNames.addressesLocationRouteName:
+        return MaterialPageRoute(builder: (context) => MapScreen());
       case PageRoutesNames.productDetailsRouteName:
         return MaterialPageRoute(builder: (context) {
           final arg = settings.arguments as ProductEntity;

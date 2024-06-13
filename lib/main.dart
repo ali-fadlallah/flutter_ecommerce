@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_ecommerce_app/core/local/shared_preference_helper.dart';
 import 'package:flutter_ecommerce_app/core/utils/bloc_providers/providers.dart';
 
@@ -14,6 +15,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   ApiManager.init();
   await SharedPreferenceHelper.init();
+  await dotenv.load(fileName: '.env');
   runApp(MultiBlocProvider(
     providers: BlocProviders.providers,
     child: const MyApp(),

@@ -70,7 +70,10 @@ class CartScreen extends StatelessWidget {
                                 ),
                             itemCount: state.cartResponseEntity!.data?.products?.length.toInt() ?? 0),
                       ),
-                      CartCheckOut(totalAmount: state.cartResponseEntity!.data?.totalCartPrice?.toInt() ?? 0),
+                      CartCheckOut(
+                        totalAmount: state.cartResponseEntity!.data?.totalCartPrice?.toInt() ?? 0,
+                        paymentGatewaySource: 2,
+                      ),
                     ],
                   ),
                 );

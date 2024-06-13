@@ -9,6 +9,10 @@ class UserModel {
     this.name,
     this.email,
     this.role,
+    this.googleId,
+    this.displayName,
+    this.photoUrl,
+    this.accessToken,
   });
 
   UserModel.fromJson(dynamic json) {
@@ -16,9 +20,15 @@ class UserModel {
     email = json['email'];
     role = json['role'];
   }
+
   String? name;
   String? email;
   String? role;
+
+  String? googleId;
+  String? displayName;
+  String? accessToken;
+  String? photoUrl;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
