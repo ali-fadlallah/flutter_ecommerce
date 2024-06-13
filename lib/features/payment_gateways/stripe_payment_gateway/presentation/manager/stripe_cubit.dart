@@ -37,7 +37,6 @@ class StripeCubit extends Cubit<StripeState> {
           // Customer keys
           customerEphemeralKeySecret: data['ephemeralKey'],
           customerId: data['id'],
-
           style: ThemeMode.light,
         ),
       );
